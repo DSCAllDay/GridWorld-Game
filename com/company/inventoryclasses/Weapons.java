@@ -1,9 +1,9 @@
-package com.company;
+package com.company.inventoryclasses;
 
 /**
  * Created by esauKang on 3/21/14.
  */
-public class Armor implements InventoryItem {
+public class Weapons implements InventoryItem {
     @Override
     public void use() {
 

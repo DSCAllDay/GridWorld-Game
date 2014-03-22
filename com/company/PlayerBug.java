@@ -9,6 +9,8 @@ package com.company;
 import info.gridworld.actor.*;
 import info.gridworld.grid.Location;
 
+import java.io.*;
+
 public class PlayerBug extends Actor
 {
     private int level;
@@ -18,6 +20,43 @@ public class PlayerBug extends Actor
     private int gold;
     private Inventory inventory;
     private Location location;
+
+    public void act() {
+        super.act();
+        getInput();
+
+    }
+
+    private void getInput() {
+        boolean done = false;
+
+        do {
+            try {
+                System.out.println("Input action: wasd controls.");
+                char input = (char)System.in.read();
+                char carriagereturn = (char) System.in.read(); //for enter
+                if(input == 'q') {
+                    done = true;
+                }
+                switch(input) {
+                    case 'w':
+                        moveUp();
+                }
+
+                System.out.println(input);
+
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } while(!done);
+    }
+
+    private void moveUp() {
+
+    }
+
 
     public PlayerBug(int h, int d, int a, int g, int l)
     {

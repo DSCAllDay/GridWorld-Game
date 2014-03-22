@@ -1,4 +1,4 @@
-package com.company;
+package com.company.inventoryclasses;
 
 // Esau Kang, thomas Madden
 // Period 5

@@ -6,9 +6,10 @@ package com.company;
 // Esau Kang, thomas Madden
 // Period 5
 // March 21st, 2014
-// Inventory - Holds the player's items
+// inventoryclasses - Holds the player's items
 
 import java.util.*;
+import com.company.inventoryclasses.*;
 
 public class Inventory
 {
