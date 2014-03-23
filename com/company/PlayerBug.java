@@ -28,29 +28,52 @@ public class PlayerBug extends Actor
     }
 
     private void getInput() {
-        boolean done = false;
-
-        do {
-            try {
-                System.out.println("Input action: wasd controls.");
-                char input = (char)System.in.read();
-                char carriagereturn = (char) System.in.read(); //for enter
-                if(input == 'q') {
-                    done = true;
-                }
-                switch(input) {
-                    case 'w':
-                        moveUp();
-                }
-
-                System.out.println(input);
-
-
-
-            } catch (IOException e) {
-                e.printStackTrace();
+        try {
+            System.out.println("Input action: wasd controls; m to show minimap, i to show inventory.");
+            char input = (char)System.in.read();
+            char carriagereturn = (char) System.in.read(); //for enter
+            if(input == 'q') {
+                System.exit(0);
             }
-        } while(!done);
+            switch(input) {
+                case 'w':
+                    moveUp();
+                case 'a':
+                    moveLeft();
+                case 's':
+                    moveDown();
+                case 'd':
+                    moveRight();
+                case 'm':
+                    showMap();
+                case 'i':
+                    Inventory.showInventory(inventory);
+            }
+
+            System.out.println(input);
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void showMap() {
+
+    }
+
+    private void moveRight() {
+
+    }
+
+    private void moveDown() {
+
+    }
+
+    private void moveLeft() {
+
     }
 
     private void moveUp() {

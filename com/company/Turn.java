@@ -10,6 +10,8 @@ public class Turn
     private static ArrayList<Integer> directions = new ArrayList<Integer>();
     private static int currentGrid;
 
+
+    /*
     public static void move(PlayerBug player, Location loc)
     {
         if (Turn.inBounds(loc))
@@ -36,12 +38,15 @@ public class Turn
 
     public static void changeGrid(Location loc)
     {
-		/* if (there’s a grid there)
+		 if (there’s a grid there)
 			put it in that grid
 		else
 			make a new grid
-		*/
+
+
     }
+    */
+
 
     public static boolean inBounds(Location loc)
     {

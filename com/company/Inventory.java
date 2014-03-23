@@ -40,5 +40,9 @@ public class Inventory
                 answer += inventory.get(i) + ", ";
         return answer;
     }
+
+    public static void showInventory(Inventory i) {
+
+    }
 }
 
