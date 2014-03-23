@@ -60,23 +60,23 @@ public class PlayerBug extends Actor
 
     }
 
-    private void showMap() {
+    public void showMap() {
 
     }
 
-    private void moveRight() {
+    public void moveRight() {
 
     }
 
-    private void moveDown() {
+    public void moveDown() {
 
     }
 
-    private void moveLeft() {
+    public void moveLeft() {
 
     }
 
-    private void moveUp() {
+    public void moveUp() {
 
     }
 
