@@ -6,9 +6,7 @@ import info.gridworld.actor.*;
 
 public class Turn
 {
-    private static ArrayList<BoundedGrid> grids = new ArrayList<BoundedGrid>();
-    private static ArrayList<Integer> directions = new ArrayList<Integer>();
-    private static int currentGrid;
+    private Grid<Actor> master = new BoundedGrid<Actor>(50, 50);
 
     public static boolean inBounds(Location loc)
     {
