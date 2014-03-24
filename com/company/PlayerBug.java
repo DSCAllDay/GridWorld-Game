@@ -69,7 +69,6 @@ public class PlayerBug extends Actor {
             } else if (input == 'i') {
                 System.out.println(inventory);       // toString method takes care of that
             }
-
             System.out.println(input);
 
         } catch (IOException e) {
@@ -81,19 +80,27 @@ public class PlayerBug extends Actor {
     }
 
     public void moveUp() {
-        System.out.println("check");            // Use for now for experimentation
+        setDirection(0);
+        Location loc = getLocation();
+        moveTo(new Location(loc.getRow() - 1, loc.getCol()));
     }
 
     public void moveLeft() {
-
+        setDirection(270);
+        Location loc = getLocation();
+        moveTo(new Location(loc.getRow(), loc.getCol() - 1));
     }
 
     public void moveDown() {
-
+        setDirection(180);
+        Location loc = getLocation();
+        moveTo(new Location(loc.getRow() + 1, loc.getCol()));
     }
 
     public void moveRight() {
-
+        setDirection(90);
+        Location loc = getLocation();
+        moveTo(new Location(loc.getRow(), loc.getCol() + 1));
     }
 
     public void showMap()
