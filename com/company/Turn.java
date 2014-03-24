@@ -6,11 +6,6 @@ import info.gridworld.actor.*;
 
 public class Turn
 {
-    private Grid<Actor> master = new BoundedGrid<Actor>(50, 50);
-
-    public static boolean inBounds(Location loc)
-    {
-        return loc.getRow() >= 0 && loc.getRow() < 4 && loc.getCol() >= 0 && loc.getCol() < 4;
-    }
+    // I just realized, we don't really need this class anymore, we can just have all the methods be in PlayerBug for grid stuff
 }
 
