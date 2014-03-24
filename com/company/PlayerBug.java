@@ -3,7 +3,7 @@ package com.company;
 // Esau Kang, thomas Madden
 // Period 5
 // March 21st, 2014
-// PlayerBug - Plays an RPG game-
+// PlayerBug - Plays an RPG game- asdfa
 
 
 import info.gridworld.actor.*;
