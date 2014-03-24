@@ -8,4 +8,19 @@ public class Weapons implements InventoryItem {
     public void use() {
 
     }
+
+    public void drop()
+    {
+
+    }
+
+    public void pickUp()
+    {
+
+    }
+
+    public String toString()
+    {
+        return "weapon";
+    }
 }
