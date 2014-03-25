@@ -9,7 +9,7 @@ import info.gridworld.actor.*;
 import info.gridworld.grid.*;
 
 public class Main {
-	private final int SIDE = 55;
+	/*private final int SIDE = 55;
 	private final int NUMROCKS = 5;
 	private Grid<Actor> masterGrid = new BoundedGrid<Actor>(SIDE, SIDE);
 	private ActorWorld masterWorld = new ActorWorld(masterGrid);
@@ -17,7 +17,6 @@ public class Main {
 	private ActorWorld currentWorld = new ActorWorld(currentGrid);
 	private PlayerBug playerBugA = new PlayerBug();
 	private PlayerBug playerBugB = new PlayerBug();
-
 	private static Main m  = new Main();                                //singleton
 	private Main() { }
 	public static Main getInstance() {
@@ -26,9 +25,12 @@ public class Main {
 
 
 	public static void main(String[] args) {
-		m.start();
+	 m.start(); */
+    public static void main(String[] args) {
+        PlayerBug unReal = new PlayerBug();             // unreal as in it isn't an actual player
+        unReal.play();
     }
-
+/*
 	private void start() {
 
 		for(int i = 0; i < SIDE; i++) {                                 //cycles through each side
@@ -56,10 +58,6 @@ public class Main {
 		masterWorld.show();
 	}
 
-/*
-PlayerBug unReal = new PlayerBug();
-unReal.play();
- */
 
 	public PlayerBug getPlayerBugA() {
 		return playerBugA;
@@ -92,7 +90,7 @@ unReal.play();
 	public void setCurrentGrid(Grid<Actor> currentGrid) {
 		this.currentGrid = currentGrid;
 	}
-
+*/
 }
 
 
