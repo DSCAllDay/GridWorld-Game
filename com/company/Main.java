@@ -9,35 +9,84 @@ import info.gridworld.actor.*;
 import info.gridworld.grid.*;
 
 public class Main {
-	private static final int NUMROCKS = 5;
-	private static final int SIDE = 55;
+	private final int SIDE = 55;
+	private final int NUMROCKS = 5;
+	private Grid<Actor> masterGrid = new BoundedGrid<Actor>(SIDE, SIDE);
+	private ActorWorld masterWorld = new ActorWorld(masterGrid);
+	private Grid<Actor> currentGrid = new BoundedGrid<Actor>(5, 5);
+	private ActorWorld currentWorld = new ActorWorld(currentGrid);
+	private PlayerBug a = new PlayerBug();
+	private PlayerBug b = new PlayerBug();
+
+	private static Main m  = new Main();                                //singleton
+	private Main() { }
+	public static Main getInstance() {
+		return m;
+	}
+
 
 	public static void main(String[] args) {
-	    Grid<Actor> masterView = new BoundedGrid<Actor>(SIDE, SIDE);
-		ActorWorld masterWorld = new ActorWorld(masterView);
-		Grid<Actor> currentView = new BoundedGrid<Actor>(5, 5);
-		ActorWorld currentWorld = new ActorWorld(currentView);
+		Main m = new Main();
+		m.start();
+    }
 
+	private void start() {
 
-	    for(int i = 0; i < SIDE; i++) {                                 //cycles through each side
+		for(int i = 0; i < SIDE; i++) {                                 //cycles through each side
 		    int rand = (int)(Math.random()*NUMROCKS+1);
 		    for(int j = 0; j < rand; j++) {                             //random # of rocks on each side
 			    Rock a = new Rock();
 			    Rock b = new Rock();
 			    Rock c = new Rock();
 			    Rock d = new Rock();
-			    a.putSelfInGrid(masterView, new Location(i, j));
-			    b.putSelfInGrid(masterView, new Location(i, SIDE - 1 - j));
-				c.putSelfInGrid(masterView, new Location(j, i));
-			    d.putSelfInGrid(masterView, new Location(SIDE - 1 - j, i));
+			    a.putSelfInGrid(masterGrid, new Location(i, j));
+			    b.putSelfInGrid(masterGrid, new Location(i, SIDE - 1 - j));
+				c.putSelfInGrid(masterGrid, new Location(j, i));
+			    d.putSelfInGrid(masterGrid, new Location(SIDE - 1 - j, i));
 		    }
 	    }
+		//currentWorld.add(new Location(2, 2), a);
+		a.putSelfInGrid(currentGrid,new Location(2,2));
+		currentWorld.show();
+		//masterWorld.add(new Location(49, 27), b);
+		b.putSelfInGrid(masterGrid, new Location(49, 27));
 
-		currentWorld.add(new Location(2, 2), new PlayerBug());
-		//currentWorld.show();
-		masterWorld.add(new Location(49, 27), new PlayerBug());
-        masterWorld.show();
-    }
+		masterWorld.show();
+	}
+
+
+
+	public PlayerBug getA() {
+		return a;
+	}
+
+	public void setA(PlayerBug a) {
+		this.a = a;
+	}
+
+	public PlayerBug getB() {
+		return b;
+	}
+
+	public void setB(PlayerBug b) {
+		this.b = b;
+	}
+
+	public Grid<Actor> getMasterGrid() {
+		return masterGrid;
+	}
+
+	public void setMasterGrid(Grid<Actor> masterGrid) {
+		this.masterGrid = masterGrid;
+	}
+
+	public Grid<Actor> getCurrentGrid() {
+		return currentGrid;
+	}
+
+	public void setCurrentGrid(Grid<Actor> currentGrid) {
+		this.currentGrid = currentGrid;
+	}
 
 }
 

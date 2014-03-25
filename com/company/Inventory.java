@@ -9,8 +9,7 @@ import com.company.inventoryclasses.InventoryItem;
 
 import java.util.ArrayList;
 
-public class Inventory
-{
+public class Inventory {
     private ArrayList<InventoryItem> inventory;
     private int numberItems;
 

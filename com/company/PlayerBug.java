@@ -5,11 +5,11 @@ package com.company;
 // March 21st, 2014
 // PlayerBug - Plays an RPG game
 
-
-import info.gridworld.actor.*;
+import info.gridworld.actor.Actor;
+import info.gridworld.grid.Grid;
 import info.gridworld.grid.Location;
 
-import java.io.*;
+import java.io.IOException;
 
 public class PlayerBug extends Actor {
     private int level;
@@ -18,12 +18,14 @@ public class PlayerBug extends Actor {
     private int attack;
     private int gold;
     private Inventory inventory;
-    private Location location;
+	private Location location;
+	private Grid<Actor> grid;
+
 
     public void act() {
         super.act();
-
-
+	    System.out.println("master" + Main.getInstance().getMasterGrid() + "current" + Main.getInstance().getCurrentGrid() + "B" + Main.getInstance().getB());
+	    processGrid(Main.getInstance().getMasterGrid(), Main.getInstance().getCurrentGrid(), Main.getInstance().getB());
         getInput();
 
     }
@@ -83,6 +85,22 @@ public class PlayerBug extends Actor {
     public void moveUp() {
 
     }
+
+	public void processGrid(Grid<Actor> masterView, Grid<Actor> currentView, Actor actor) {
+		int j = 0;
+		int i = 0;
+		Location playerLoc = actor.getLocation();
+		int startRows = playerLoc.getRow()-2;
+		int startCols = playerLoc.getCol()-2;
+		for(;startRows <= playerLoc.getRow() + 2; startRows++) {
+			for(; startCols <= playerLoc.getCol() + 2; startCols++) {
+				Actor a = masterView.get(new Location(startRows, startCols));
+				a.putSelfInGrid(currentView, new Location(i,j));
+				j++;
+			}
+			i++;
+		}
+	}
 
 
     public PlayerBug(int h, int d, int a, int g, int l) {
