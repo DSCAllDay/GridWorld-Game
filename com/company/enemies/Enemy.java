@@ -5,7 +5,9 @@ package com.company.enemies;
 // March 24, 2014
 // Enemy - Stores info for an enemy of Player
 
-public class Enemy {
+import info.gridworld.actor.Actor;
+
+public class Enemy extends Actor {
     private int enemyHealth;
     private int enemyDefense;
     private int enemyAttack;
