@@ -3,7 +3,7 @@ package com.company;
 // Esau Kang, thomas Madden
 // Period 5
 // March 21st, 2014
-// BugRunner - Runs a
+// BugRunner - Runs playerBugA
 
 import info.gridworld.actor.*;
 import info.gridworld.grid.*;
@@ -15,8 +15,8 @@ public class Main {
 	private ActorWorld masterWorld = new ActorWorld(masterGrid);
 	private Grid<Actor> currentGrid = new BoundedGrid<Actor>(5, 5);
 	private ActorWorld currentWorld = new ActorWorld(currentGrid);
-	private PlayerBug a = new PlayerBug();
-	private PlayerBug b = new PlayerBug();
+	private PlayerBug playerBugA = new PlayerBug();
+	private PlayerBug playerBugB = new PlayerBug();
 
 	private static Main m  = new Main();                                //singleton
 	private Main() { }
@@ -26,7 +26,6 @@ public class Main {
 
 
 	public static void main(String[] args) {
-		Main m = new Main();
 		m.start();
     }
 
@@ -45,31 +44,32 @@ public class Main {
 			    d.putSelfInGrid(masterGrid, new Location(SIDE - 1 - j, i));
 		    }
 	    }
-		//currentWorld.add(new Location(2, 2), a);
-		a.putSelfInGrid(currentGrid,new Location(2,2));
+		//currentWorld.add(new Location(2, 2), playerBugA);
+		playerBugA.putSelfInGrid(currentGrid, new Location(2, 2));
 		currentWorld.show();
-		//masterWorld.add(new Location(49, 27), b);
-		b.putSelfInGrid(masterGrid, new Location(49, 27));
+		//masterWorld.add(new Location(49, 27), playerBugB);
+		playerBugB.putSelfInGrid(masterGrid, new Location(49, 27));
+		System.out.println(playerBugB.getLocation());
 
 		masterWorld.show();
 	}
 
 
 
-	public PlayerBug getA() {
-		return a;
+	public PlayerBug getPlayerBugA() {
+		return playerBugA;
 	}
 
-	public void setA(PlayerBug a) {
-		this.a = a;
+	public void setPlayerBugA(PlayerBug playerBugA) {
+		this.playerBugA = playerBugA;
 	}
 
-	public PlayerBug getB() {
-		return b;
+	public PlayerBug getPlayerBugB() {
+		return playerBugB;
 	}
 
-	public void setB(PlayerBug b) {
-		this.b = b;
+	public void setPlayerBugB(PlayerBug playerBugB) {
+		this.playerBugB = playerBugB;
 	}
 
 	public Grid<Actor> getMasterGrid() {

@@ -6,6 +6,7 @@ package com.company;
 // PlayerBug - Plays an RPG game
 
 import info.gridworld.actor.Actor;
+import info.gridworld.actor.Rock;
 import info.gridworld.grid.Grid;
 import info.gridworld.grid.Location;
 import java.io.IOException;
@@ -23,8 +24,8 @@ public class PlayerBug extends Actor {
 
     public void act() {
         super.act();
-	    System.out.println("master" + Main.getInstance().getMasterGrid() + "current" + Main.getInstance().getCurrentGrid() + "B" + Main.getInstance().getB());
-	    processGrid(Main.getInstance().getMasterGrid(), Main.getInstance().getCurrentGrid(), Main.getInstance().getB());
+	    System.out.println("master" + Main.getInstance().getMasterGrid() + "current" + Main.getInstance().getCurrentGrid() + "B" + Main.getInstance().getPlayerBugB());
+	    processGrid(Main.getInstance().getMasterGrid(), Main.getInstance().getCurrentGrid(), Main.getInstance().getPlayerBugB());
         getInput();
 
     }
@@ -86,18 +87,24 @@ public class PlayerBug extends Actor {
     }
 
 	public void processGrid(Grid<Actor> masterView, Grid<Actor> currentView, Actor actor) {
-		int j = 0;
-		int i = 0;
+		int cols = 0;
+		int rows = 0;
 		Location playerLoc = actor.getLocation();
+		System.out.println(actor.getLocation());
 		int startRows = playerLoc.getRow()-2;
 		int startCols = playerLoc.getCol()-2;
 		for(;startRows <= playerLoc.getRow() + 2; startRows++) {
 			for(; startCols <= playerLoc.getCol() + 2; startCols++) {
-				Actor a = masterView.get(new Location(startRows, startCols));
-				a.putSelfInGrid(currentView, new Location(i,j));
-				j++;
+				if(masterView.get(new Location(startRows, startCols)) instanceof Actor) {
+					Actor a = masterView.get(new Location(startRows, startCols));
+					a.putSelfInGrid(currentView, new Location(rows, cols));
+					Rock rock1 = new Rock();
+					rock1.putSelfInGrid(currentView, new Location(0,0));
+
+				}
+				cols++;
 			}
-			i++;
+			rows++;
 		}
 	}
 
