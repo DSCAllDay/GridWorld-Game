@@ -163,5 +163,12 @@ public class PlayerBug extends Actor {
         this.health = health;
     }
 
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
 }
 
