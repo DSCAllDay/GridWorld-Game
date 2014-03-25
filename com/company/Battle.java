@@ -32,8 +32,17 @@ public class Battle {
             } else if (input.equals("flee")) {
                 flee(player, enemy);
             }
-            if (enemy.getEnemyHealth() > 0)
-                enemyAttack(player, enemy);
+            if (enemy.getEnemyHealth() > 0) {
+                int advantage = 0;
+                com.company.Inventory inventory = player.getInventory();
+                for (int i = 0; i < inventory.getNumberItems(); i++) {
+                    if (inventory.getItem(i) instanceof com.company.inventoryclasses.Armor) {
+                        com.company.inventoryclasses.Armor armor = inventory.getItem(i);
+                        advantage = armor.getStrength();
+                    }
+                }
+                enemyAttack(player, enemy, advantage);
+            }
         } else if (enemy.getEnemyHealth() < 0) {
             collectSpoils(player, enemy);
         } else {
@@ -43,7 +52,7 @@ public class Battle {
     }
 
     public void getOptions(com.company.PlayerBug player) {
-        Inventory inventory = player.getInventory();
+        com.company.Inventory inventory = player.getInventory();
         int numItems = inventory.getNumberItems();
         System.out.println("\nYou have these weapons to hit with: ");
         for (int i = 0; i < numItems; i++)
@@ -67,8 +76,8 @@ public class Battle {
         }
     }
 
-    public void enemyAttack(com.company.PlayerBug player, com.company.enemies.Enemy enemy) {
-        int attack = enemy.getEnemyAttack() - player.getDefense();
+    public void enemyAttack(com.company.PlayerBug player, com.company.enemies.Enemy enemy, int advantage) {     // Advantage for player
+        int attack = enemy.getEnemyAttack() - player.getDefense() - advantage;
         int levelDifference = enemy.getEnemyLevel() - player.getLevel();
         if (hitOrMiss(levelDifference)) {
             player.setHealth(player.getHealth() - enemy.getEnemyAttack());

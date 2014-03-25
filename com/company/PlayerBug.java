@@ -103,8 +103,7 @@ public class PlayerBug extends Actor {
 					a.putSelfInGrid(currentView, new Location(rows, cols));
 					Rock rock1 = new Rock();
 					rock1.putSelfInGrid(currentView, new Location(0,0));
-
-				}
+                }
 				cols++;
 			}
 			rows++;
