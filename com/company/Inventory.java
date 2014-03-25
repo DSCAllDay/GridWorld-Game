@@ -6,7 +6,6 @@ package com.company;
 // inventoryclasses - Holds the player's items
 
 import com.company.inventoryclasses.InventoryItem;
-
 import java.util.ArrayList;
 
 public class Inventory {
