@@ -1,8 +1,5 @@
 package com.company;
 
-/**
- * Created by esauKang on 3/21/14.
- */
 // Esau Kang, thomas Madden
 // Period 5
 // March 21st, 2014
