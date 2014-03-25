@@ -29,12 +29,7 @@ public class Inventory
     {
         String answer = "You have " + numberItems + " items. You have…";
         for (int i = 0; i < numberItems; i++)
-            if (i == numberItems - 1 && numberItems != 1)
-                answer += "and " + inventory.get(i) + ".";
-            else if (numberItems == i)
-                answer += inventory.get(i) + ".";
-            else
-                answer += inventory.get(i) + ", ";
+            answer += "\n" + inventory.get(i);              // Requires that all inventory items have toString methods
         return answer;
     }
 

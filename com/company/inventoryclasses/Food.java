@@ -6,4 +6,19 @@ public class Food implements InventoryItem {
     public void use() {
 
     }
+
+    public void drop()
+    {
+
+    }
+
+    public void pickUp()
+    {
+
+    }
+
+    public String toString()
+    {
+        return "Food";
+    }
 }

@@ -6,4 +6,23 @@ public class Armor implements InventoryItem {
     public void use() {
 
     }
+<<<<<<< HEAD
 }
+=======
+
+    public void drop()
+    {
+
+    }
+
+    public void pickUp()
+    {
+
+    }
+
+    public String toString()
+    {
+        return "armor";
+    }
+}
+>>>>>>> FETCH_HEAD
