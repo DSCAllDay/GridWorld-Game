@@ -23,20 +23,21 @@ public class Inventory {
         numberItems++;
     }
 
+    public InventoryItem getItem(int index) {
+        return inventory.get(index);
+    }
+
     public String toString() {
         String answer = "You have " + numberItems + " items. You have…";
         for (int i = 0; i < numberItems; i++)
-            if (i == numberItems - 1 && numberItems != 1)
-                answer += "and " + inventory.get(i) + ".";
-            else if (numberItems == i)
-                answer += inventory.get(i) + ".";
-            else
-                answer += inventory.get(i) + ", ";
+            answer += "\n" + inventory.get(i);
         return answer;
     }
 
-    public static void showInventory(Inventory i) {
+    public static void showInventory(Inventory inventory) {}
 
+    public int getNumberItems() {
+        return numberItems;
     }
 }
 
