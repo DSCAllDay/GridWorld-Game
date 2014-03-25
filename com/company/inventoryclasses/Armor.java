@@ -6,9 +6,7 @@ public class Armor implements InventoryItem {
     public void use() {
 
     }
-<<<<<<< HEAD
-}
-=======
+
 
     public void drop()
     {
@@ -25,4 +23,3 @@ public class Armor implements InventoryItem {
         return "armor";
     }
 }
->>>>>>> FETCH_HEAD
