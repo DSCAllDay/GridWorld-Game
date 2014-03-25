@@ -1,5 +1,8 @@
 package com.company;
 
+/**
+ * Created by esauKang on 3/21/14.
+ */
 // Esau Kang, thomas Madden
 // Period 5
 // March 21st, 2014
@@ -29,7 +32,12 @@ public class Inventory
     {
         String answer = "You have " + numberItems + " items. You have…";
         for (int i = 0; i < numberItems; i++)
-            answer += "\n" + inventory.get(i);              // Requires that all inventory items have toString methods
+            if (i == numberItems - 1 && numberItems != 1)
+                answer += "and " + inventory.get(i) + ".";
+            else if (numberItems == i)
+                answer += inventory.get(i) + ".";
+            else
+                answer += inventory.get(i) + ", ";
         return answer;
     }
 

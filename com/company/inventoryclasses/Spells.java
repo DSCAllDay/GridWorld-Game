@@ -8,19 +8,4 @@ public class Spells implements InventoryItem {
     public void use() {
 
     }
-
-    public void drop()
-    {
-
-    }
-
-    public void pickUp()
-    {
-
-    }
-
-    public String toString()
-    {
-        return "spell";
-    }
 }
