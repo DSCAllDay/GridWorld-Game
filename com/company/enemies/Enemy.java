@@ -1,4 +1,4 @@
-package com.company;
+package com.company.enemies;
 
 // Esau Kang, thomas Madden
 // Period 5

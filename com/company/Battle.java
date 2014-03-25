@@ -1,24 +1,25 @@
 package com.company;
 
+import java.util.Scanner;
+
 // Esau Kang, thomas Madden
 // Period 5
 // March 21st, 2014
 // InventoryItem - Item which can be put in the inventory
 
-import java.util.*;
-
 public class Battle {
 
-    public Battle(PlayerBug player, Enemy enemy) {
+    public Battle(com.company.PlayerBug player, com.company.enemies.Enemy enemy) {
         fightBattle(player, enemy, 1);
     }
 
-    public void fightBattle(PlayerBug player, Enemy enemy, int turn) {
+    public void fightBattle(com.company.PlayerBug player, com.company.enemies.Enemy enemy, int turn) {
         System.out.println("You are fighting " + enemy + ". It is turn " + turn + ". What would you like to do?");
         if (enemy.getEnemyHealth() > 0 && player.getHealth() > 0) {
             Scanner keys = new Scanner(System.in);
             String input = keys.nextLine();
-            if (input.equals("options")) {         // we can use my Commands file and StringUtil to figure out punctuation stuff
+            input = Battle.clean(input);                    // Should be PlayerBug.clean(input) later but i won't edit that for now
+            if (input.equals("options")) {
                 getOptions(player);
             } else if (input.equals("attack")) {
                 attack(player, enemy, 0);
@@ -31,15 +32,17 @@ public class Battle {
             } else if (input.equals("flee")) {
                 flee(player, enemy);
             }
-            // Enemy attacks you, haven't done it yet
+            if (enemy.getEnemyHealth() > 0)
+                enemyAttack(player, enemy);
         } else if (enemy.getEnemyHealth() < 0) {
             collectSpoils(player, enemy);
         } else {
-            // You lose, i haven't done it yet
+            System.out.println("You lost to " + enemy + ". Game over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Thanks for playing.");
+            // how do i end the game here?
         }
     }
 
-    public void getOptions(PlayerBug player) {
+    public void getOptions(com.company.PlayerBug player) {
         Inventory inventory = player.getInventory();
         int numItems = inventory.getNumberItems();
         System.out.println("\nYou have these weapons to hit with: ");
@@ -53,14 +56,25 @@ public class Battle {
         System.out.println("\nOr you can always flee.");
     }
 
-    public void attack(PlayerBug player, Enemy enemy, int advantage) {
+    public void attack(com.company.PlayerBug player, com.company.enemies.Enemy enemy, int advantage) {
         int attack = player.getAttack() + advantage - enemy.getEnemyDefense();
         int levelDifference = player.getLevel() - enemy.getEnemyLevel();
         if (hitOrMiss(levelDifference)) {
             enemy.setEnemyHealth(enemy.getEnemyHealth() - attack);
-            System.out.println("You hit the enemy! " + enemy + " has " + enemy + "health left.");
+            System.out.println("\nYou hit the enemy! " + enemy + " has " + enemy.getEnemyHealth() + "health left.");
         } else {
-            System.out.println("You missed the enemy! " + enemy + " still has " + enemy + "health left.");
+            System.out.println("\nYou missed the enemy! " + enemy + " still has " + enemy.getEnemyHealth() + "health left.");
+        }
+    }
+
+    public void enemyAttack(com.company.PlayerBug player, com.company.enemies.Enemy enemy) {
+        int attack = enemy.getEnemyAttack() - player.getDefense();
+        int levelDifference = enemy.getEnemyLevel() - player.getLevel();
+        if (hitOrMiss(levelDifference)) {
+            player.setHealth(player.getHealth() - enemy.getEnemyAttack());
+            System.out.println("\nThe enemy hit you! You now have " + player.getHealth() + " health left.");
+        } else {
+            System.out.println("The enemy missed you! You still have " + player.getHealth() + " health left.");
         }
     }
 
@@ -79,12 +93,32 @@ public class Battle {
         return (int)(Math.random() * 100) <= chances;
     }
 
-    public void flee(PlayerBug player, Enemy enemy) {
+    public void flee(com.company.PlayerBug player, com.company.enemies.Enemy enemy) {
         int levelDifference = player.getLevel() - enemy.getEnemyLevel();
     }
 
-    public void collectSpoils(PlayerBug player, Enemy enemy) {
-        System.out.println("\nYou won! You get " + enemy.getEnemyGold());
+    public void collectSpoils(com.company.PlayerBug player, com.company.enemies.Enemy enemy) {
+        System.out.println("\nYou won! You get " + enemy.getEnemyGold() + " and you are now level " + player.getLevel() + 1);
         player.setGold(player.getGold() + enemy.getEnemyGold());
+        player.setLevel(player.getLevel() + 1);
+    }
+
+    // pre: none
+    // post: Cleans a string (Making it lowercase) and takes away all spaces/punctuation
+    public static String clean(String input)
+    {
+        String cleaned = "";
+        for (int i = 0; i < input.length(); i++)
+        {
+            char charAt = input.charAt(i);
+            if (input.charAt(i) >= 'a' && charAt <= 'z')
+                cleaned += charAt;
+            else if (input.charAt(i) >= 'A' && input.charAt(i) <= 'Z')
+            {
+                charAt += 32;
+                cleaned += charAt;
+            }
+        }
+        return cleaned;
     }
 }
