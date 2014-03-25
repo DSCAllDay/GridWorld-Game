@@ -11,8 +11,7 @@ import info.gridworld.grid.Location;
 
 import java.io.*;
 
-public class PlayerBug extends Actor
-{
+public class PlayerBug extends Actor {
     private int level;
     private int health;
     private int defense;
@@ -23,6 +22,8 @@ public class PlayerBug extends Actor
 
     public void act() {
         super.act();
+
+
         getInput();
 
     }
@@ -68,6 +69,7 @@ public class PlayerBug extends Actor
 
     public void moveRight() {
 
+
     }
 
     public void moveDown() {
@@ -83,8 +85,7 @@ public class PlayerBug extends Actor
     }
 
 
-    public PlayerBug(int h, int d, int a, int g, int l)
-    {
+    public PlayerBug(int h, int d, int a, int g, int l) {
         health = h;
         defense = d;
         attack = a;
@@ -93,8 +94,7 @@ public class PlayerBug extends Actor
         inventory = new Inventory();
 
     }
-    public PlayerBug()
-    {
+    public PlayerBug() {
         health = 100;
         defense = 100;
         attack = 10;

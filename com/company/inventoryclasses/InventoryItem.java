@@ -8,7 +8,5 @@ package com.company.inventoryclasses;
 public interface InventoryItem {
      public void use();
 
-
-
 }
 
