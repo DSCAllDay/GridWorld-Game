@@ -50,6 +50,8 @@ public class Main {
 		//masterWorld.add(new Location(49, 27), playerBugB);
 		playerBugB.putSelfInGrid(masterGrid, new Location(49, 27));
 		System.out.println(playerBugB.getLocation());
+		Rock rocks = new Rock();
+		rocks.putSelfInGrid(currentGrid, new Location(4, 2));
 
 		masterWorld.show();
 	}

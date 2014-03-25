@@ -5,10 +5,10 @@ package com.company;
 // March 21st, 2014
 // PlayerBug - Plays an RPG game
 
-import info.gridworld.actor.Actor;
-import info.gridworld.actor.Rock;
+import info.gridworld.actor.*;
 import info.gridworld.grid.Grid;
 import info.gridworld.grid.Location;
+
 import java.io.IOException;
 
 public class PlayerBug extends Actor {
@@ -20,6 +20,24 @@ public class PlayerBug extends Actor {
     private Inventory inventory;
 	private Location location;
 	private Grid<Actor> grid;
+
+	public PlayerBug(int h, int d, int a, int g, int l) {
+		health = h;
+		defense = d;
+		attack = a;
+		gold = g;
+		level = l;
+		inventory = new Inventory();
+
+	}
+	public PlayerBug() {
+		health = 100;
+		defense = 100;
+		attack = 10;
+		gold = 5;
+		level = 1;
+		inventory = new Inventory();
+	}
 
 
     public void act() {
@@ -65,28 +83,9 @@ public class PlayerBug extends Actor {
 
     }
 
-    public void showMap() {
-
-    }
-
-    public void moveRight() {
-
-
-    }
-
-    public void moveDown() {
-
-    }
-
-    public void moveLeft() {
-
-    }
-
-    public void moveUp() {
-
-    }
-
 	public void processGrid(Grid<Actor> masterView, Grid<Actor> currentView, Actor actor) {
+		//Rock rock1 = new Rock();
+		//rock1.putSelfInGrid(currentView, new Location(0,0));
 		int cols = 0;
 		int rows = 0;
 		Location playerLoc = actor.getLocation();
@@ -94,9 +93,13 @@ public class PlayerBug extends Actor {
 		int startRows = playerLoc.getRow()-2;
 		int startCols = playerLoc.getCol()-2;
 		for(;startRows <= playerLoc.getRow() + 2; startRows++) {
-			for(; startCols <= playerLoc.getCol() + 2; startCols++) {
-				if(masterView.get(new Location(startRows, startCols)) instanceof Actor) {
-					Actor a = masterView.get(new Location(startRows, startCols));
+			for(int col = startCols; col <= playerLoc.getCol() + 2; col++) {
+				Object o = masterView.get(new Location(startRows, startCols));
+				if(o != null) {
+					System.out.println(o.toString());
+				}
+				if(o instanceof Actor) {
+					Actor a = masterView.get(new Location(startRows, col));
 					a.putSelfInGrid(currentView, new Location(rows, cols));
 					Rock rock1 = new Rock();
 					rock1.putSelfInGrid(currentView, new Location(0,0));
@@ -108,24 +111,28 @@ public class PlayerBug extends Actor {
 		}
 	}
 
+	public void showMap() {
 
-    public PlayerBug(int h, int d, int a, int g, int l) {
-        health = h;
-        defense = d;
-        attack = a;
-        gold = g;
-        level = l;
-        inventory = new Inventory();
+	}
 
-    }
-    public PlayerBug() {
-        health = 100;
-        defense = 100;
-        attack = 10;
-        gold = 5;
-        level = 1;
-        inventory = new Inventory();
-    }
+	public void moveRight() {
+
+
+	}
+
+	public void moveDown() {
+
+	}
+
+	public void moveLeft() {
+
+	}
+
+	public void moveUp() {
+
+	}
+
+
 
 
     public Inventory getInventory() {
