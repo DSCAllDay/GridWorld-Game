@@ -34,9 +34,9 @@ public class Main {
 	    }
 
 		currentWorld.add(new Location(2, 2), new PlayerBug());
-		currentWorld.show();
+		//currentWorld.show();
 		masterWorld.add(new Location(49, 27), new PlayerBug());
-        //masterWorld.show();
+        masterWorld.show();
     }
 
 }
