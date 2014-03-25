@@ -8,7 +8,6 @@ package com.company;
 import info.gridworld.actor.Actor;
 import info.gridworld.grid.Grid;
 import info.gridworld.grid.Location;
-
 import java.io.IOException;
 
 public class PlayerBug extends Actor {
