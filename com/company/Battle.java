@@ -8,50 +8,49 @@ import java.util.Scanner;
 // InventoryItem - Item which can be put in the inventory
 
 public class Battle {
+    private com.company.PlayerBug player;
+    private com.company.enemies.Enemy enemy;
 
     public Battle(com.company.PlayerBug player, com.company.enemies.Enemy enemy) {
-        fightBattle(player, enemy, 1);
+        this.player = player;
+        this.enemy = enemy;
+        fightBattle(1);
     }
 
-    public void fightBattle(com.company.PlayerBug player, com.company.enemies.Enemy enemy, int turn) {
+    public void fightBattle(int turn) {
         System.out.println("You are fighting " + enemy + ". It is turn " + turn + ". What would you like to do?");
         if (enemy.getEnemyHealth() > 0 && player.getHealth() > 0) {
             Scanner keys = new Scanner(System.in);
             String input = keys.nextLine();
             input = Battle.clean(input);                    // Should be PlayerBug.clean(input) later but i won't edit that for now
             if (input.equals("options")) {
-                getOptions(player);
+                getOptions();
             } else if (input.equals("attack")) {
-                attack(player, enemy, 0);
+                attack(0);
             } else if (input.equals("slash")) {
-                attack(player, enemy, 10);
+                attack(10);
             } else if (input.equals("cast fire")) {
-                attack(player, enemy, 5);
+                attack(5);
             } else if (input.equals("cast frost")) {
-                attack(player, enemy, 15);
+                attack(15);
             } else if (input.equals("flee")) {
-                flee(player, enemy);
+                flee();
             }
             if (enemy.getEnemyHealth() > 0) {
                 int advantage = 0;
-                com.company.Inventory inventory = player.getInventory();
-                for (int i = 0; i < inventory.getNumberItems(); i++) {
-                    if (inventory.getItem(i) instanceof com.company.inventoryclasses.Armor) {
-                        com.company.inventoryclasses.Armor armor = inventory.getItem(i);
-                        advantage = armor.getStrength();
-                    }
-                }
-                enemyAttack(player, enemy, advantage);
+                if (player.isWearingArmor())
+
+                enemyAttack(advantage);
             }
         } else if (enemy.getEnemyHealth() < 0) {
-            collectSpoils(player, enemy);
+            collectSpoils();
         } else {
             System.out.println("You lost to " + enemy + ". Game over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Thanks for playing.");
             // how do i end the game here?
         }
     }
 
-    public void getOptions(com.company.PlayerBug player) {
+    public void getOptions() {
         com.company.Inventory inventory = player.getInventory();
         int numItems = inventory.getNumberItems();
         System.out.println("\nYou have these weapons to hit with: ");
@@ -65,7 +64,7 @@ public class Battle {
         System.out.println("\nOr you can always flee.");
     }
 
-    public void attack(com.company.PlayerBug player, com.company.enemies.Enemy enemy, int advantage) {
+    public void attack(int advantage) {
         int attack = player.getAttack() + advantage - enemy.getEnemyDefense();
         int levelDifference = player.getLevel() - enemy.getEnemyLevel();
         if (hitOrMiss(levelDifference)) {
@@ -76,7 +75,7 @@ public class Battle {
         }
     }
 
-    public void enemyAttack(com.company.PlayerBug player, com.company.enemies.Enemy enemy, int advantage) {     // Advantage for player
+    public void enemyAttack(int advantage) {     // Advantage for player
         int attack = enemy.getEnemyAttack() - player.getDefense() - advantage;
         int levelDifference = enemy.getEnemyLevel() - player.getLevel();
         if (hitOrMiss(levelDifference)) {
@@ -102,11 +101,11 @@ public class Battle {
         return (int)(Math.random() * 100) <= chances;
     }
 
-    public void flee(com.company.PlayerBug player, com.company.enemies.Enemy enemy) {
+    public void flee() {
         int levelDifference = player.getLevel() - enemy.getEnemyLevel();
     }
 
-    public void collectSpoils(com.company.PlayerBug player, com.company.enemies.Enemy enemy) {
+    public void collectSpoils() {
         System.out.println("\nYou won! You get " + enemy.getEnemyGold() + " and you are now level " + player.getLevel() + 1);
         player.setGold(player.getGold() + enemy.getEnemyGold());
         player.setLevel(player.getLevel() + 1);

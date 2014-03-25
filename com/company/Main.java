@@ -56,7 +56,10 @@ public class Main {
 		masterWorld.show();
 	}
 
-
+/*
+PlayerBug unReal = new PlayerBug();
+unReal.play();
+ */
 
 	public PlayerBug getPlayerBugA() {
 		return playerBugA;

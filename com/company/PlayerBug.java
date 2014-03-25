@@ -16,6 +16,7 @@ public class PlayerBug extends Actor {
     private int health;
     private int defense;
     private int attack;
+    private int armorStrength;
     private int gold;
     private Inventory inventory;
 	private Location location;
@@ -27,6 +28,7 @@ public class PlayerBug extends Actor {
 		attack = a;
 		gold = g;
 		level = l;
+        armorStrength = 0;
 		inventory = new Inventory();
 
 	}
@@ -36,6 +38,7 @@ public class PlayerBug extends Actor {
 		attack = 10;
 		gold = 5;
 		level = 1;
+        armorStrength = 0;
 		inventory = new Inventory();
 	}
 
@@ -83,6 +86,14 @@ public class PlayerBug extends Actor {
 
     }
 
+    public boolean isWearingArmor() {
+        return armorStrength > 0;
+    }
+
+    public void wearArmor(int armorStrength) {
+        this.armorStrength = armorStrength;
+    }
+
 	public void processGrid(Grid<Actor> masterView, Grid<Actor> currentView, Actor actor) {
 		//Rock rock1 = new Rock();
 		//rock1.putSelfInGrid(currentView, new Location(0,0));
@@ -108,6 +119,89 @@ public class PlayerBug extends Actor {
 			}
 			rows++;
 		}
+
+        /*
+
+        private Grid<Actor> masterView;
+        private Grid<Actor> currentView;
+        private PlayerBug masterBug;
+        private PlayerBug currentBug;
+
+        public void play() {
+            masterView = new BoundedGrid(50, 50);
+            currentView = new BoundedGrid(6, 6);
+            masterBug = new PlayerBug();
+            currentBug = new PlayerBug();
+            masterBug.putSelfInGrid(masterView, new Location(20, 20);
+            currentBug.putSelfInGrid(currentView, new Location(2, 2);
+            fillMasterView();
+            fillCurrentView();              // which we can use to fill in the current view each turn
+        }
+
+        public void fillMasterView() {
+            int rand = (int)(Math.random()*NUMROCKS+1);
+            for(int i = 0; i < SIDE; i++) {                                 //cycles through each side
+		        for(int j = 0; j < rand; j++) {                             //random # of rocks on each side
+			        new Rock().putSelfInGrid(masterGrid, new Location(i, j));
+			        new Rock().putSelfInGrid(masterGrid, new Location(i, SIDE - 1 - j));
+				    new Rock().putSelfInGrid(masterGrid, new Location(j, i));
+			        new Rock().putSelfInGrid(masterGrid, new Location(SIDE - 1 - j, i));
+			    }
+		    }
+	    }
+
+        public void fillCurrentView() {
+            Location loc = getLocation();
+            for (int row = loc.getRow() - 2; row <= loc.getRow() + 2; row++)
+                for (int col = loc.getCol() - 2; col <= loc.getCol() + 2; col++) {
+                    Actor masterActor = masterView.get(new Location(row, col));
+                    if (masterActor != null) {
+                        Actor currentActor = masterActor;
+                        currentActor.putSelfinGrid(currentView, new Location(row - loc.getRow() + 2, col - loc.getCol() + 2));
+                    }
+                }
+        }
+
+        public void moveUp() {
+            Location loc = masterBug.getLocation();
+            Location finalLoc = new Location(loc.getRow() - 1, loc.getCol());
+            if (masterView.get(finalLoc) == null)
+                masterBug.moveTo(finalLoc);
+            else
+                System.out.println("\nYou can't go that way!\n");
+            fillCurrentView();
+        }
+
+        public void moveLeft() {
+            Location loc = masterBug.getLocation();
+            Location finalLoc = new Location(loc.getRow(), loc.getCol() - 1);
+            if (masterView.get(finalLoc) == null)
+                masterBug.moveTo(finalLoc);
+            else
+                System.out.println("\nYou can't go that way!\n");
+            fillCurrentView();
+        }
+
+        public void moveDown() {
+            Location loc = masterBug.getLocation();
+            Location finalLoc = new Location(loc.getRow() + 1, loc.getCol());
+            if (masterView.get(finalLoc) == null)
+                masterBug.moveTo(finalLoc);
+            else
+                System.out.println("\nYou can't go that way!\n");
+            fillCurrentView();
+        }
+
+        public void moveRight() {
+            Location loc = masterBug.getLocation();
+            Location finalLoc = new Location(loc.getRow(), loc.getCol() + 1);
+            if (masterView.get(finalLoc) == null)
+                masterBug.moveTo(finalLoc);
+            else
+                System.out.println("\nYou can't go that way!\n");
+            fillCurrentView();
+        }
+        */
 	}
 
 	public void showMap() {
