@@ -22,7 +22,8 @@ public class Battle {
         if (enemy.getEnemyHealth() > 0 && player.getHealth() > 0) {
             Scanner keys = new Scanner(System.in);
             String input = keys.nextLine();
-            input = Battle.clean(input);                    // Should be PlayerBug.clean(input) later but i won't edit that for now
+            input = Battle.clean(input);
+            boolean successfulFlee = false;
             if (input.equals("options")) {
                 getOptions();
             } else if (input.equals("attack")) {
@@ -34,15 +35,15 @@ public class Battle {
             } else if (input.equals("cast frost")) {
                 attack(15);
             } else if (input.equals("flee")) {
-                flee();
+                successfulFlee = flee();
             }
-            if (enemy.getEnemyHealth() > 0) {
+            if (enemy.getEnemyHealth() > 0 && !successfulFlee) {
                 int advantage = 0;
-                if (player.isWearingArmor())
-
                 enemyAttack(advantage);
             }
-        } else if (enemy.getEnemyHealth() < 0) {
+            if (!successfulFlee)
+                fightBattle(turn + 1);
+        } else if (enemy.getEnemyHealth() <= 0) {
             collectSpoils();
         } else {
             System.out.println("You lost to " + enemy + ".");
@@ -69,9 +70,9 @@ public class Battle {
         int levelDifference = player.getLevel() - enemy.getEnemyLevel();
         if (hitOrMiss(levelDifference)) {
             enemy.setEnemyHealth(enemy.getEnemyHealth() - attack);
-            System.out.println("\nYou hit the enemy! " + enemy + " has " + enemy.getEnemyHealth() + "health left.");
+            System.out.println("\nYou hit the enemy! " + enemy + " has " + enemy.getEnemyHealth() + " health left.");
         } else {
-            System.out.println("\nYou missed the enemy! " + enemy + " still has " + enemy.getEnemyHealth() + "health left.");
+            System.out.println("\nYou missed the enemy! " + enemy + " still has " + enemy.getEnemyHealth() + " health left.");
         }
     }
 
@@ -106,7 +107,7 @@ public class Battle {
         return (int)(Math.random() * 100) <= chances;
     }
 
-    public void flee() {
+    public boolean flee() {
         int levelDifference = player.getLevel() - enemy.getEnemyLevel();
         int chances = 0;
         if (levelDifference >= 1 && levelDifference <= 3)
@@ -121,15 +122,19 @@ public class Battle {
             chances = 10;
         if ((int)(Math.random() * 100) <= chances) {
             System.out.println("You fleed! You are away from the battle.");
-            // End battle
+            return true;
         } else {
-            if (player.getHealth() > 10) {
-                player.setHealth(player.getHealth() - 10);
+            player.setHealth(player.getHealth() - 10);
+            if (player.getHealth() > 0) {
                 System.out.println("You were unable to flee. You are whacked by the gamemaster and lose 10 health. You now have " + player.getHealth() + " health left.");
+                return false;
             }
-            else
+            else {
+                System.out.println("You were unable to flee. You are whacked by the gamemaster and lose 10 health. You now have " + player.getHealth() + " health left, so you die.");
                 die();
+            }
         }
+        return false;
     }
 
     public void collectSpoils() {
@@ -139,7 +144,8 @@ public class Battle {
     }
 
     public void die() {
-
+        System.out.println("You died! Sucks.");
+        System.exit(0);
     }
 
     // pre: none

@@ -15,7 +15,7 @@ public class BraveNewWorld extends ActorWorld{
 	private  PlayerBug currentBug;
 	private Inventory inventory;
 
-	public BraveNewWorld(PlayerBug currentBug, BoundedGrid<Actor> currentView) {
+	public BraveNewWorld(BoundedGrid<Actor> currentView) {
 		super(currentView);
 		this.currentBug = currentBug;
 		this.currentView = currentView;
@@ -24,6 +24,8 @@ public class BraveNewWorld extends ActorWorld{
 
 	public void go() {
 		masterView = new BoundedGrid<Actor>(55, 55);
+        currentBug = new PlayerBug();
+        currentBug.putSelfInGrid(currentView, new Location(2, 2));
 		masterBug = new PlayerBug();
 		masterBug.putSelfInGrid(masterView, new Location(43, 27));
         new Gianni().putSelfInGrid(masterView, new Location(41, 26));
@@ -74,6 +76,9 @@ public class BraveNewWorld extends ActorWorld{
 		Location finalLoc = new Location(loc.getRow() - 1, loc.getCol());
 		if (masterView.get(finalLoc) == null)
 			masterBug.moveTo(finalLoc);
+        else if (masterView.get(finalLoc) instanceof Enemy) {
+            Battle battle = new Battle((PlayerBug) (masterView.get(loc)), (Enemy) (masterView.get(finalLoc)));
+        }
 		else
 			System.out.println("\nYou can't go that way!\n");
 		fillCurrentView();
@@ -86,6 +91,9 @@ public class BraveNewWorld extends ActorWorld{
 		Location finalLoc = new Location(loc.getRow(), loc.getCol() - 1);
 		if (masterView.get(finalLoc) == null)
 			masterBug.moveTo(finalLoc);
+        else if (masterView.get(finalLoc) instanceof Enemy) {
+            Battle battle = new Battle((PlayerBug) (masterView.get(loc)), (Enemy) (masterView.get(finalLoc)));
+        }
 		else
 			System.out.println("\nYou can't go that way!\n");
 		fillCurrentView();
@@ -97,6 +105,9 @@ public class BraveNewWorld extends ActorWorld{
 		Location finalLoc = new Location(loc.getRow() + 1, loc.getCol());
 		if (masterView.get(finalLoc) == null)
 			masterBug.moveTo(finalLoc);
+        else if (masterView.get(finalLoc) instanceof Enemy) {
+            Battle battle = new Battle((PlayerBug) (masterView.get(loc)), (Enemy) (masterView.get(finalLoc)));
+        }
 		else
 			System.out.println("\nYou can't go that way!\n");
 		fillCurrentView();
@@ -108,6 +119,9 @@ public class BraveNewWorld extends ActorWorld{
 		Location finalLoc = new Location(loc.getRow(), loc.getCol() + 1);
 		if (masterView.get(finalLoc) == null)
 			masterBug.moveTo(finalLoc);
+        else if (masterView.get(finalLoc) instanceof Enemy) {
+            Battle battle = new Battle((PlayerBug) (masterView.get(loc)), (Enemy) (masterView.get(finalLoc)));
+        }
 		else
 			System.out.println("\nYou can't go that way!\n");
 		fillCurrentView();
@@ -152,6 +166,9 @@ public class BraveNewWorld extends ActorWorld{
                         finalLoc = new Location(loc.getRow(), loc.getCol() + 1);
                     if (masterView.get(finalLoc) == null)
                         masterView.get(loc).moveTo(finalLoc);                           // It's on current grid!
+                    else if (masterView.get(finalLoc) instanceof PlayerBug) {
+                        Battle battle = new Battle((PlayerBug)(masterView.get(finalLoc)), (Enemy)(masterView.get(loc)));
+                    }
                 }
             }
         }

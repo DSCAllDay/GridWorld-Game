@@ -25,7 +25,7 @@ public class Enemy extends Actor {
     }
 
     public int getEnemyHealth() {
-        return enemyAttack;
+        return enemyHealth;
     }
 
     public int getEnemyDefense() {
