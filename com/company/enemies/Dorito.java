@@ -6,7 +6,7 @@ package com.company.enemies;
 // Dorito - MR. B HATES DORITOS!
 
 public class Dorito extends Enemy {
-    public Dorito() {
-        super(35, 35, 20, 3, "a dorito");
-    }
+    public Dorito() { super(35, 35, 20, 3, "a dorito"); }
+
+    public void act() {}
 }
