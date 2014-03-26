@@ -36,6 +36,8 @@ public class PlayerBug extends Actor {
 		inventory = new Inventory();
 	}
 
+    public void act() {}
+
     public boolean isWearingArmor() {
         return armorStrength > 0;
     }

@@ -25,8 +25,8 @@ public class BraveNewWorld extends ActorWorld{
 	public void go() {
 		masterView = new BoundedGrid<Actor>(55, 55);
 		masterBug = new PlayerBug();
-		masterBug.putSelfInGrid(masterView, new Location(49, 27));
-        new Gianni().putSelfInGrid(masterView, new Location(47, 27));
+		masterBug.putSelfInGrid(masterView, new Location(43, 27));
+        new Gianni().putSelfInGrid(masterView, new Location(41, 26));
 		fillMasterView();
 		fillCurrentView();                                  // which we can use to fill in the current view each turn
 		ActorWorld masterWorld = new ActorWorld(masterView);
@@ -47,15 +47,19 @@ public class BraveNewWorld extends ActorWorld{
 			}
 			switch(input) {
 				case "W":
+                    actGianni();
 					moveUp();
 					break;
 				case "A":
+                    actGianni();
 					moveLeft();
 					break;
 				case "S":
+                    actGianni();
 					moveDown();
 					break;
 				case "D":
+                    actGianni();
 					moveRight();
 					break;
 				case "I":
@@ -123,12 +127,35 @@ public class BraveNewWorld extends ActorWorld{
                     if (masterActor instanceof Gianni) {
                         Gianni currentGianni = new Gianni();
                         Location currentLoc = new Location(row - loc.getRow() + 2, col - loc.getCol() + 2);
-                        currentGianni.putSelfInGrid(currentView, currentLoc);
+                        if (inBounds(currentLoc))
+                            currentGianni.putSelfInGrid(currentView, currentLoc);
                     }
                 }
 			}
 		}
 	}
+
+    public void actGianni() {
+        for (int row = 0; row < SIDE; row++) {
+            for (int col = 0; col < SIDE; col++) {
+                Location loc = new Location(row, col);
+                if (masterView.get(loc) instanceof Gianni && Math.random() < 0.15) {
+                    int direction = (int) (Math.random() * 4);
+                    Location finalLoc;
+                    if (direction == 0)
+                        finalLoc = new Location(loc.getRow() - 1, loc.getCol());
+                    else if (direction == 1)
+                        finalLoc = new Location(loc.getRow(), loc.getCol() - 1);
+                    else if (direction == 2)
+                        finalLoc = new Location(loc.getRow() + 1, loc.getCol());
+                    else
+                        finalLoc = new Location(loc.getRow(), loc.getCol() + 1);
+                    if (masterView.get(finalLoc) == null)
+                        masterView.get(loc).moveTo(finalLoc);                           // It's on current grid!
+                }
+            }
+        }
+    }
 
 	public void fillMasterView() {
 		for(int i = 0; i < SIDE; i++) {                                     //cycles through each side
@@ -157,4 +184,8 @@ public class BraveNewWorld extends ActorWorld{
 			}
 		}
 	}
+
+    public boolean inBounds(Location loc) {
+        return loc.getRow() >= 0 && loc.getRow() < 5 && loc.getCol() >= 0 && loc.getCol() < 5;
+    }
 }
