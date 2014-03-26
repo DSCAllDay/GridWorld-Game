@@ -5,8 +5,8 @@ package com.company;
 // March 21st, 2014
 // PlayerBug - Plays an RPG game
 
-import info.gridworld.actor.*;
-import info.gridworld.grid.BoundedGrid;
+import info.gridworld.actor.Actor;
+import info.gridworld.actor.Rock;
 import info.gridworld.grid.Grid;
 import info.gridworld.grid.Location;
 
@@ -27,6 +27,7 @@ public class PlayerBug extends Actor {
     private static Grid<Actor> currentView;
     private static PlayerBug masterBug;
     private static PlayerBug currentBug;
+
 
 	public PlayerBug(int h, int d, int a, int g, int l) {
 		health = h;
@@ -50,8 +51,8 @@ public class PlayerBug extends Actor {
 
 
     public void act() {
-        super.act();
-	    getInput();
+        //super.act();
+	    //getInput();
 
     }
 
@@ -101,20 +102,7 @@ public class PlayerBug extends Actor {
         this.armorStrength = armorStrength;
     }
 
-    public void play() {
-        masterView = new BoundedGrid<Actor>(55, 55);
-        currentView = new BoundedGrid<Actor>(5, 5);
-        masterBug = new PlayerBug();
-        currentBug = new PlayerBug();
-        masterBug.putSelfInGrid(masterView, new Location(49, 27));
-        currentBug.putSelfInGrid(currentView, new Location(2, 2));
-        fillMasterView();
-        fillCurrentView();              // which we can use to fill in the current view each turn
-        ActorWorld currentWorld = new ActorWorld(currentView);
-        currentWorld.show();
-        ActorWorld masterWorld = new ActorWorld(masterView);
-        masterWorld.show();                                                         // we'll take this out
-    }
+
 
     public void fillMasterView() {
         for(int i = 0; i < SIDE; i++) {                                     //cycles through each side

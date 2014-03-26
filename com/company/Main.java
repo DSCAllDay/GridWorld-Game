@@ -9,88 +9,31 @@ import info.gridworld.actor.*;
 import info.gridworld.grid.*;
 
 public class Main {
-	/*private final int SIDE = 55;
-	private final int NUMROCKS = 5;
-	private Grid<Actor> masterGrid = new BoundedGrid<Actor>(SIDE, SIDE);
-	private ActorWorld masterWorld = new ActorWorld(masterGrid);
-	private Grid<Actor> currentGrid = new BoundedGrid<Actor>(5, 5);
-	private ActorWorld currentWorld = new ActorWorld(currentGrid);
-	private PlayerBug playerBugA = new PlayerBug();
-	private PlayerBug playerBugB = new PlayerBug();
-	private static Main m  = new Main();                                //singleton
-	private Main() { }
-	public static Main getInstance() {
-		return m;
-	}
+	private int level;
+	private int health;
+	private int defense;
+	private int attack;
+	private int armorStrength;
+	private int gold;
+	private Inventory inventory;
+	private Location location;
+	private static final int SIDE = 55;
+	private static final int NUMROCKS = 5;
+	private static BoundedGrid<Actor> masterView;
+	private static BoundedGrid<Actor> currentView;
+	private static PlayerBug masterBug;
+	private static PlayerBug currentBug;
+
+
 
 
 	public static void main(String[] args) {
-	 m.start(); */
-    public static void main(String[] args) {
-        PlayerBug unReal = new PlayerBug();             // unreal as in it isn't an actual player
-        unReal.play();
-    }
-/*
-	private void start() {
-
-		for(int i = 0; i < SIDE; i++) {                                 //cycles through each side
-		    int rand = (int)(Math.random()*NUMROCKS+1);
-		    for(int j = 0; j < rand; j++) {                             //random # of rocks on each side
-			    Rock a = new Rock();
-			    Rock b = new Rock();
-			    Rock c = new Rock();
-			    Rock d = new Rock();
-			    a.putSelfInGrid(masterGrid, new Location(i, j));
-			    b.putSelfInGrid(masterGrid, new Location(i, SIDE - 1 - j));
-				c.putSelfInGrid(masterGrid, new Location(j, i));
-			    d.putSelfInGrid(masterGrid, new Location(SIDE - 1 - j, i));
-		    }
-	    }
-		//currentWorld.add(new Location(2, 2), playerBugA);
-		playerBugA.putSelfInGrid(currentGrid, new Location(2, 2));
-		currentWorld.show();
-		//masterWorld.add(new Location(49, 27), playerBugB);
-		playerBugB.putSelfInGrid(masterGrid, new Location(49, 27));
-		System.out.println(playerBugB.getLocation());
-		Rock rocks = new Rock();
-		rocks.putSelfInGrid(currentGrid, new Location(4, 2));
-
-		masterWorld.show();
+		currentBug = new PlayerBug();
+		currentView = new BoundedGrid<Actor>(5,5);
+		currentBug.putSelfInGrid(currentView, new Location(2, 2));
+		BraveNewWorld braveNewWorld = new BraveNewWorld(currentBug, currentView);
+		braveNewWorld.go();
 	}
-
-
-	public PlayerBug getPlayerBugA() {
-		return playerBugA;
-	}
-
-	public void setPlayerBugA(PlayerBug playerBugA) {
-		this.playerBugA = playerBugA;
-	}
-
-	public PlayerBug getPlayerBugB() {
-		return playerBugB;
-	}
-
-	public void setPlayerBugB(PlayerBug playerBugB) {
-		this.playerBugB = playerBugB;
-	}
-
-	public Grid<Actor> getMasterGrid() {
-		return masterGrid;
-	}
-
-	public void setMasterGrid(Grid<Actor> masterGrid) {
-		this.masterGrid = masterGrid;
-	}
-
-	public Grid<Actor> getCurrentGrid() {
-		return currentGrid;
-	}
-
-	public void setCurrentGrid(Grid<Actor> currentGrid) {
-		this.currentGrid = currentGrid;
-	}
-*/
 }
 
 
