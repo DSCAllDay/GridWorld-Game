@@ -83,7 +83,7 @@ public class Battle {
             if (player.getHealth() > 0)
                 System.out.println("\nThe enemy hit you! You now have " + player.getHealth() + " health left.");
             else {
-                System.out.println("\n" + enemy.getEnemyName() + " killed you with that last hit. :(");
+                System.out.println("\n" + enemy + " killed you with that last hit. :(");
                 die();
             }
         } else {
