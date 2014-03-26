@@ -3,9 +3,12 @@ package com.company.inventoryclasses;
 /**
  * Created by esauKang on 3/21/14.
  */
-public class Food implements InventoryItem {
-    @Override
-    public void use() {
+public class Food {
+    private int strength;
+    private String type;
 
+    public Food(int strength, String type) {
+        this.strength = strength;
+        this.type = type;
     }
 }

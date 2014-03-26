@@ -5,24 +5,23 @@ package com.company;
 // March 21st, 2014
 // inventoryclasses - Holds the player's items
 
-import com.company.inventoryclasses.InventoryItem;
 import java.util.ArrayList;
 
 public class Inventory {
-    private ArrayList<InventoryItem> inventory;
+    private ArrayList<Object> inventory;
     private int numberItems;
 
     public Inventory() {
-        inventory = new ArrayList<InventoryItem>(10);
+        inventory = new ArrayList<Object>(10);
         numberItems = 0;
     }
 
-    public void addToInventory(InventoryItem item) {
+    public void addToInventory(Object item) {
         inventory.add(item);
         numberItems++;
     }
 
-    public InventoryItem getItem(int index) {
+    public Object getItem(int index) {
         return inventory.get(index);
     }
 

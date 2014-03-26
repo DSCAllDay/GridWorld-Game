@@ -3,15 +3,12 @@ package com.company.inventoryclasses;
 /**
  * Created by esauKang on 3/21/14.
  */
-public class Armor implements InventoryItem {
+public class Armor {
     private int strength;
+    private String type;
 
-    @Override
-    public void use() {
-
-    }
-
-    public int getStrength() {
-        return strength;
+    public Armor(int strength, String type) {
+        this.strength = strength;
+        this.type = type;
     }
 }

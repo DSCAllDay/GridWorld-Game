@@ -5,7 +5,7 @@ import java.util.Scanner;
 // Esau Kang, thomas Madden
 // Period 5
 // March 21st, 2014
-// InventoryItem - Item which can be put in the inventory
+// Battle - Battle an enemy!
 
 public class Battle {
     private com.company.PlayerBug player;
@@ -45,8 +45,8 @@ public class Battle {
         } else if (enemy.getEnemyHealth() < 0) {
             collectSpoils();
         } else {
-            System.out.println("You lost to " + enemy + ". Game over!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Thanks for playing.");
-            // how do i end the game here?
+            System.out.println("You lost to " + enemy + ".");
+            die();
         }
     }
 
@@ -79,8 +79,13 @@ public class Battle {
         int attack = enemy.getEnemyAttack() - player.getDefense() - advantage;
         int levelDifference = enemy.getEnemyLevel() - player.getLevel();
         if (hitOrMiss(levelDifference)) {
-            player.setHealth(player.getHealth() - enemy.getEnemyAttack());
-            System.out.println("\nThe enemy hit you! You now have " + player.getHealth() + " health left.");
+            player.setHealth(player.getHealth() - attack);
+            if (player.getHealth() > 0)
+                System.out.println("\nThe enemy hit you! You now have " + player.getHealth() + " health left.");
+            else {
+                System.out.println("\n" + enemy.getEnemyName() + " killed you with that last hit. :(");
+                die();
+            }
         } else {
             System.out.println("The enemy missed you! You still have " + player.getHealth() + " health left.");
         }
@@ -89,26 +94,52 @@ public class Battle {
     public boolean hitOrMiss(int levelDifference) {
         int chances = 0;
         if (levelDifference >= 1 && levelDifference <= 3)
-            chances = 65;
+            chances = 60;
         else if (levelDifference >= 4 && levelDifference <= 5)
-            chances = 85;
+            chances = 75;
         else if (levelDifference == 0)
             chances = 50;
         else if (levelDifference <= -1 && levelDifference >= -3)
-            chances = 35;
+            chances = 40;
         else if (levelDifference <= -4 && levelDifference >= -5)
-            chances = 15;
+            chances = 25;
         return (int)(Math.random() * 100) <= chances;
     }
 
     public void flee() {
         int levelDifference = player.getLevel() - enemy.getEnemyLevel();
+        int chances = 0;
+        if (levelDifference >= 1 && levelDifference <= 3)
+            chances = 40;
+        else if (levelDifference >= 4 && levelDifference <= 5)
+            chances = 50;
+        else if (levelDifference == 0)
+            chances = 25;
+        else if (levelDifference <= -1 && levelDifference >= -3)
+            chances = 15;
+        else if (levelDifference <= -4 && levelDifference >= -5)
+            chances = 10;
+        if ((int)(Math.random() * 100) <= chances) {
+            System.out.println("You fleed! You are away from the battle.");
+            // End battle
+        } else {
+            if (player.getHealth() > 10) {
+                player.setHealth(player.getHealth() - 10);
+                System.out.println("You were unable to flee. You are whacked by the gamemaster and lose 10 health. You now have " + player.getHealth() + " health left.");
+            }
+            else
+                die();
+        }
     }
 
     public void collectSpoils() {
         System.out.println("\nYou won! You get " + enemy.getEnemyGold() + " and you are now level " + player.getLevel() + 1);
         player.setGold(player.getGold() + enemy.getEnemyGold());
         player.setLevel(player.getLevel() + 1);
+    }
+
+    public void die() {
+
     }
 
     // pre: none
