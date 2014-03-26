@@ -19,31 +19,41 @@ public class Battle {
     public void fightBattle(int turn) {
         System.out.println("\nYou are fighting " + enemy + ". It is turn " + turn + ". What would you like to do? You can just \'attack\', \'slash\' if you have a sword, \'cast fire\', or \'cast frost\' if you have spells.");
         if (enemy.getEnemyHealth() > 0 && player.getHealth() > 0) {
-            Scanner keys = new Scanner(System.in);
-            String input = keys.nextLine();
-            input = Battle.clean(input);
+            boolean realResponse = false;
             boolean successfulFlee = false;
-            if (input.equals("options")) {
-                getOptions();
-            } else if (input.equals("attack")) {
-                attack(0);
-            } else if (input.equals("slash")) {
-                if (player.hasSword())
-                    attack(10);
-                else
-                    System.out.println("\nYou can't slash! You don't have a sword.");
-            } else if (input.equals("cast fire")) {
-                if (player.hasFire())
-                    attack(5);
-                else
-                    System.out.println("\nYou can't cast fire! You don't have a spell.");
-            } else if (input.equals("cast frost")) {
-                if (player.hasFrost())
-                    attack(15);
-                else
-                    System.out.println("\nYou can't cast frost! You don't have a spell.");
-            } else if (input.equals("flee")) {
-                successfulFlee = flee();
+            while (!realResponse) {
+                Scanner keys = new Scanner(System.in);
+                String input = keys.nextLine();
+                input = Battle.clean(input);
+                if (input.equals("options")) {
+                    getOptions();
+                } else if (input.equals("attack")) {
+                    attack(0);
+                    realResponse = true;
+                } else if (input.equals("slash")) {
+                    if (player.hasSword()) {
+                        attack(10);
+                        realResponse = true;
+                    }
+                    else
+                        System.out.println("\nYou can't slash! You don't have a sword.");
+                } else if (input.equals("cast fire")) {
+                    if (player.hasFire()) {
+                        attack(5);
+                        realResponse = true;
+                    }
+                    else
+                        System.out.println("\nYou can't cast fire! You don't have a spell.");
+                } else if (input.equals("cast frost")) {
+                    if (player.hasFrost()) {
+                        attack(15);
+                        realResponse = true;
+                    }
+                    else
+                        System.out.println("\nYou can't cast frost! You don't have a spell.");
+                } else if (input.equals("flee")) {
+                    successfulFlee = flee();
+                }
             }
             if (enemy.getEnemyHealth() > 0) {
                 int advantage = 0;
