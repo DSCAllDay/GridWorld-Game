@@ -17,11 +17,11 @@ public class Battle {
     }
 
     public void fightBattle(int turn) {
-        System.out.println("\nYou are fighting " + enemy + ". It is turn " + turn + ". What would you like to do? You can just \'attack\', \'slash\' if you have a sword, \'cast fire\', or \'cast frost\' if you have spells.");
         if (enemy.getEnemyHealth() > 0 && player.getHealth() > 0) {
             boolean realResponse = false;
             boolean successfulFlee = false;
             while (!realResponse) {
+                System.out.println("\nYou are fighting " + enemy + ". It is turn " + turn + ". What would you like to do? You can just \'attack\', \'slash\' if you have a sword, \'cast fire\', or \'cast frost\' if you have spells.");
                 Scanner keys = new Scanner(System.in);
                 String input = keys.nextLine();
                 input = Battle.clean(input);
@@ -53,6 +53,9 @@ public class Battle {
                         System.out.println("\nYou can't cast frost! You don't have a spell.");
                 } else if (input.equals("flee")) {
                     successfulFlee = flee();
+                    realResponse = true;
+                } else {
+                    System.out.println("\nThat's not a valid response, I'm afraid.");
                 }
             }
             if (enemy.getEnemyHealth() > 0) {

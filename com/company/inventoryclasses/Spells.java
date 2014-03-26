@@ -16,7 +16,7 @@ public class Spells {
         return strength;
     }
 
-    public String getType() {
-        return type;
+    public String toString() {
+        return "\tSpell\t\t" + type;
     }
 }

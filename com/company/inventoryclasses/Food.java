@@ -16,7 +16,7 @@ public class Food {
         return strength;
     }
 
-    public String getType() {
-        return type;
+    public String toString() {
+        return "\tFood\t\t" + type;
     }
 }

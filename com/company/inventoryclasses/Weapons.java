@@ -16,7 +16,7 @@ public class Weapons {
         return strength;
     }
 
-    public String getType() {
-        return type;
+    public String toString() {
+        return "\tSword\t\t" + type;
     }
 }
