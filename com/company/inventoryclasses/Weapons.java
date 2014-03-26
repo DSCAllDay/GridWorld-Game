@@ -5,10 +5,18 @@ package com.company.inventoryclasses;
  */
 public class Weapons {
     private int strength;
-    private String name;
+    private String type;
 
-    public Weapons(int strength, String name) {
+    public Weapons(int strength, String type) {
         this.strength = strength;
-        this.name = name;
+        this.type = type;
+    }
+
+    public int getStrength() {
+        return strength;
+    }
+
+    public String getType() {
+        return type;
     }
 }

@@ -11,4 +11,12 @@ public class Spells {
         this.strength = strength;
         this.type = type;
     }
+
+    public int getStrength() {
+        return strength;
+    }
+
+    public String getType() {
+        return type;
+    }
 }
