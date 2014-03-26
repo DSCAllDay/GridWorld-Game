@@ -5,7 +5,7 @@ package com.company;
 // March 21st, 2014
 // PlayerBug - Plays an RPG game
 
-import info.gridworld.actor.Actor;
+import info.gridworld.actor.*;
 
 public class PlayerBug extends Actor {
     private int level;

@@ -1,10 +1,7 @@
 package com.company;
 
-import info.gridworld.actor.Actor;
-import info.gridworld.actor.ActorWorld;
-import info.gridworld.actor.Rock;
-import info.gridworld.grid.BoundedGrid;
-import info.gridworld.grid.Location;
+import info.gridworld.actor.*;
+import info.gridworld.grid.*;
 
 
 public class BraveNewWorld extends ActorWorld{
