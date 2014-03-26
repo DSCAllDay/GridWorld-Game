@@ -7,7 +7,7 @@ package com.company.enemies;
 
 public class Ms_Smith extends Enemy {
     public Ms_Smith() {
-        super(50, 50, 25, 3, "Ms. Smith");
+        super(50, 50, 25, 3, 30, "Ms. Smith");
     }
 
     public void act() {}

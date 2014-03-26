@@ -7,7 +7,7 @@ package com.company.enemies;
 
 import info.gridworld.actor.Actor;
 
-public class Enemy extends Actor {
+public abstract class Enemy extends Actor {
     private int enemyHealth;
     private int enemyDefense;
     private int enemyAttack;
@@ -15,11 +15,11 @@ public class Enemy extends Actor {
     private int enemyLevel;
     private String enemyName;
 
-    public Enemy(int eH, int eD, int eA, int eL, String eN) {
+    public Enemy(int eH, int eD, int eA, int eL, int eG, String eN) {
         this.enemyHealth = eH;
         this.enemyDefense = eD;
         this.enemyAttack = eA;
-        this.enemyGold = (int)(Math.random() * 11);
+        this.enemyGold = (int)(Math.random() * eG);
         this.enemyLevel = eL;
         this.enemyName = eN;
     }

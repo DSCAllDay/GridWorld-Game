@@ -1,4 +1,5 @@
 package com.company;
+import com.company.inventoryclasses.*;
 
 // Esau Kang, thomas Madden
 // Period 5
@@ -28,7 +29,7 @@ public class PlayerBug extends Actor {
 	}
 	public PlayerBug() {
 		health = 100;
-		defense = 100;
+		defense = 10;
 		attack = 10;
 		gold = 5;
 		level = 1;
@@ -40,6 +41,27 @@ public class PlayerBug extends Actor {
 
     public boolean isWearingArmor() {
         return armorStrength > 0;
+    }
+
+    public boolean hasSword() {
+        for (int i = 0; i < inventory.getNumberItems(); i++)
+            if (inventory.getItem(i) instanceof Weapons)
+                return true;
+        return false;
+    }
+
+    public boolean hasFire() {
+        for (int i = 0; i < inventory.getNumberItems(); i++)
+            if (inventory.getItem(i) instanceof Spells && inventory.getItem(i).equals("fire"))
+                return true;
+        return false;
+    }
+
+    public boolean hasFrost() {
+        for (int i = 0; i < inventory.getNumberItems(); i++)
+            if (inventory.getItem(i) instanceof Spells && inventory.getItem(i).equals("frost"))
+                return true;
+        return false;
     }
 
     public void wearArmor(int armorStrength) {

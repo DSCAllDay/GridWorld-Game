@@ -1,5 +1,4 @@
 package com.company;
-
 import java.util.Scanner;
 
 // Esau Kang, thomas Madden
@@ -18,7 +17,7 @@ public class Battle {
     }
 
     public void fightBattle(int turn) {
-        System.out.println("You are fighting " + enemy + ". It is turn " + turn + ". What would you like to do?");
+        System.out.println("\nYou are fighting " + enemy + ". It is turn " + turn + ". What would you like to do? You can just \'attack\', \'slash\' if you have a sword, \'cast fire\', or \'cast frost\' if you have spells.");
         if (enemy.getEnemyHealth() > 0 && player.getHealth() > 0) {
             Scanner keys = new Scanner(System.in);
             String input = keys.nextLine();
@@ -29,25 +28,34 @@ public class Battle {
             } else if (input.equals("attack")) {
                 attack(0);
             } else if (input.equals("slash")) {
-                attack(10);
+                if (player.hasSword())
+                    attack(10);
+                else
+                    System.out.println("\nYou can't slash! You don't have a sword.");
             } else if (input.equals("cast fire")) {
-                attack(5);
+                if (player.hasFire())
+                    attack(5);
+                else
+                    System.out.println("\nYou can't cast fire! You don't have a spell.");
             } else if (input.equals("cast frost")) {
-                attack(15);
+                if (player.hasFrost())
+                    attack(15);
+                else
+                    System.out.println("\nYou can't cast frost! You don't have a spell.");
             } else if (input.equals("flee")) {
                 successfulFlee = flee();
             }
-            if (enemy.getEnemyHealth() > 0 && !successfulFlee) {
+            if (enemy.getEnemyHealth() > 0) {
                 int advantage = 0;
                 enemyAttack(advantage);
             }
-            if (!successfulFlee)
+            if (!successfulFlee && player.getHealth() > 0 && enemy.getEnemyHealth() > 0)
                 fightBattle(turn + 1);
-        } else if (enemy.getEnemyHealth() <= 0) {
-            collectSpoils();
-        } else {
+        } if (player.getHealth() <= 0) {
             System.out.println("You lost to " + enemy + ".");
             die();
+        } else if (enemy.getEnemyHealth() <= 0) {
+            collectSpoils();
         }
     }
 
@@ -67,6 +75,8 @@ public class Battle {
 
     public void attack(int advantage) {
         int attack = player.getAttack() + advantage - enemy.getEnemyDefense();
+        if (attack < 0)
+            attack = 0;
         int levelDifference = player.getLevel() - enemy.getEnemyLevel();
         if (hitOrMiss(levelDifference)) {
             enemy.setEnemyHealth(enemy.getEnemyHealth() - attack);
@@ -78,6 +88,8 @@ public class Battle {
 
     public void enemyAttack(int advantage) {     // Advantage for player
         int attack = enemy.getEnemyAttack() - player.getDefense() - advantage;
+        if (attack < 0)
+            attack = 0;
         int levelDifference = enemy.getEnemyLevel() - player.getLevel();
         if (hitOrMiss(levelDifference)) {
             player.setHealth(player.getHealth() - attack);
@@ -95,16 +107,16 @@ public class Battle {
     public boolean hitOrMiss(int levelDifference) {
         int chances = 0;
         if (levelDifference >= 1 && levelDifference <= 3)
-            chances = 60;
-        else if (levelDifference >= 4 && levelDifference <= 5)
-            chances = 75;
+            chances = 90;
+        else if (levelDifference >= 4)
+            chances = 80;
         else if (levelDifference == 0)
-            chances = 50;
+            chances = 75;
         else if (levelDifference <= -1 && levelDifference >= -3)
-            chances = 40;
-        else if (levelDifference <= -4 && levelDifference >= -5)
-            chances = 25;
-        return (int)(Math.random() * 100) <= chances;
+            chances = 70;
+        else if (levelDifference <= -4)
+            chances = 60;
+        return (int)(Math.random() * 100) + 1 <= chances;
     }
 
     public boolean flee() {
@@ -138,9 +150,9 @@ public class Battle {
     }
 
     public void collectSpoils() {
-        System.out.println("\nYou won! You get " + enemy.getEnemyGold() + " and you are now level " + player.getLevel() + 1);
         player.setGold(player.getGold() + enemy.getEnemyGold());
         player.setLevel(player.getLevel() + 1);
+        System.out.println("\nYou won! You get " + enemy.getEnemyGold() + " gold and you are now level " + player.getLevel());
     }
 
     public void die() {

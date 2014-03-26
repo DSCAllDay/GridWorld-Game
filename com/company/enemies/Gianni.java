@@ -9,7 +9,7 @@ import info.gridworld.grid.*;
 
 public class Gianni extends Enemy {
     public Gianni() {
-        super(25, 25, 15, 1, "Gianni");
+        super(20, 5, 15, 1, 10, "Gianni");
     }
 
     public void act() {}
