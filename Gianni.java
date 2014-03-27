@@ -1,15 +1,15 @@
-package com.company.enemies;
-import info.gridworld.actor.*;
-import info.gridworld.grid.*;
-
 // Esau Kang, thomas Madden
 // Period 5
 // March 25, 2014
 // Gianni - An enemy of the Mr. B PlayerBug
 
+import info.gridworld.actor.*;
+import info.gridworld.grid.*;
+
 public class Gianni extends Enemy {
     public Gianni() {
         super(20, 5, 15, 1, 10, "Gianni");
+        setColor(null);
     }
 
     public void act() {}

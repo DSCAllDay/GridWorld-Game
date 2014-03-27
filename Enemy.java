@@ -1,5 +1,3 @@
-package com.company.enemies;
-
 // Esau Kang, thomas Madden
 // Period 5
 // March 24, 2014

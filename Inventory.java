@@ -1,5 +1,3 @@
-package com.company;
-
 // Esau Kang, thomas Madden
 // Period 5
 // March 21st, 2014
@@ -26,7 +24,7 @@ public class Inventory {
     }
 
     public String toString() {
-        String answer = "You have " + numberItems + " items. You haveâ€¦";
+        String answer = "You have " + numberItems + " items. You have…";
         for (int i = 0; i < numberItems; i++)
             answer += "\n" + inventory.get(i);
         return answer;

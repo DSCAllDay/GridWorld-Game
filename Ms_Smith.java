@@ -1,5 +1,3 @@
-package com.company.enemies;
-
 // Esau Kang, thomas Madden
 // Period 5
 // March 25, 2014
@@ -8,6 +6,7 @@ package com.company.enemies;
 public class Ms_Smith extends Enemy {
     public Ms_Smith() {
         super(50, 50, 25, 3, 30, "Ms. Smith");
+        setColor(null);
     }
 
     public void act() {}
