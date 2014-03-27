@@ -15,17 +15,15 @@ public class PlayerBug extends Actor {
     private int attack;
     private int armorStrength;
     private int gold;
-	private int exp;
     private Inventory inventory;
 
-	public PlayerBug(int h, int d, int a, int g, int l, int e) {
+	public PlayerBug(int h, int d, int a, int g, int l) {
 		health = h;
 		defense = d;
 		attack = a;
 		gold = g;
 		level = l;
         armorStrength = 0;
-		exp = 0;
 		inventory = new Inventory();
 
 	}
@@ -36,7 +34,6 @@ public class PlayerBug extends Actor {
 		gold = 5;
 		level = 1;
         armorStrength = 0;
-		exp = 0;
 		inventory = new Inventory();
 	}
 
@@ -50,9 +47,9 @@ public class PlayerBug extends Actor {
     public int hasSword() {
 	    int max = 0;
         for (int i = 0; i < inventory.getNumberItems(); i++) {
-	        if(inventory.getItem(i) instanceof Weapon) {
-		        if(((Weapon) inventory.getItem(i)).getStrength() > max) {
-			        max = ((Weapon) inventory.getItem(i)).getStrength();
+	        if(inventory.getItem(i) instanceof Weapons) {
+		        if(((Weapons) inventory.getItem(i)).getStrength() > max) {
+			        max = ((Weapons) inventory.getItem(i)).getStrength();
 		        }
 	        }
         }
@@ -68,14 +65,14 @@ public class PlayerBug extends Actor {
 
     public boolean hasFire() {
         for (int i = 0; i < inventory.getNumberItems(); i++)
-            if (inventory.getItem(i) instanceof Spell && inventory.getItem(i).equals("fire"))
+            if (inventory.getItem(i) instanceof Spells && inventory.getItem(i).equals("fire"))
                 return true;
         return false;
     }
 
     public boolean hasFrost() {
         for (int i = 0; i < inventory.getNumberItems(); i++)
-            if (inventory.getItem(i) instanceof Spell && inventory.getItem(i).equals("frost"))
+            if (inventory.getItem(i) instanceof Spells && inventory.getItem(i).equals("frost"))
                 return true;
         return false;
     }
@@ -131,14 +128,6 @@ public class PlayerBug extends Actor {
 
 	public void setLevel(int level) {
 		this.level = level;
-	}
-
-	public int getExp() {
-		return exp;
-	}
-
-	public void setExp(int exp) {
-		this.exp = exp;
 	}
 }
 
