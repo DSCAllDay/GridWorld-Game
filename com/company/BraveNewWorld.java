@@ -1,10 +1,13 @@
 package com.company;
 import com.company.enemies.*;
+import com.company.inventoryclasses.Weapons;
 import info.gridworld.actor.Actor;
 import info.gridworld.actor.ActorWorld;
 import info.gridworld.actor.Rock;
 import info.gridworld.grid.BoundedGrid;
 import info.gridworld.grid.Location;
+
+import java.util.Scanner;
 
 public class BraveNewWorld extends ActorWorld{
 	private final int SIDE = 55;
@@ -43,31 +46,49 @@ public class BraveNewWorld extends ActorWorld{
 	}
 
 	private void getInput(String input) {
-			System.out.println("Input action: wasd controls; m to show minimap, i to show inventory.");
-			if(input.equals("Q")) {
-				System.exit(0);
-			}
-			switch(input) {
-				case "W":
-                    actGianni();
-					moveUp();
-					break;
-				case "A":
-                    actGianni();
-					moveLeft();
-					break;
-				case "S":
-                    actGianni();
-					moveDown();
-					break;
-				case "D":
-                    actGianni();
-					moveRight();
-					break;
-				case "I":
-					Inventory.showInventory(inventory);
-					break;
-			}
+		System.out.println("Input action: wasd controls; m to show minimap, i to show inventory.");
+		if(input.equals("Q")) {
+			System.exit(0);
+		}
+		switch(input) {
+			case "W":
+                enemyAct();
+				moveUp();
+				break;
+			case "A":
+                enemyAct();
+				moveLeft();
+				break;
+			case "S":
+                enemyAct();
+				moveDown();
+				break;
+			case "D":
+                enemyAct();
+				moveRight();
+				break;
+			case "P":
+				openShop();
+				break;
+			case "I":
+				System.out.println(masterBug.getInventory());
+				break;
+		}
+	}
+
+	private void openShop() {
+		System.out.println("Welcome to Esau's Goody Shop! What do you desire? \n ");
+		Scanner keys = new Scanner(System.in);
+
+		if(masterBug.getLevel() == 1) {
+			System.out.println("You can buy: \n(1) Epic Sword \t\t\t 3 gold");
+		}
+		int item = keys.nextInt();
+		if(item == 1) {
+			masterBug.getInventory().addToInventory(new Weapons(10, "Epic"));
+			masterBug.setGold(masterBug.getGold() - 3);
+		}
+
 	}
 
 	public void moveUp() {
@@ -147,6 +168,10 @@ public class BraveNewWorld extends ActorWorld{
                 }
 			}
 		}
+	}
+
+	public void enemyAct() {
+		actGianni();
 	}
 
     public void actGianni() {

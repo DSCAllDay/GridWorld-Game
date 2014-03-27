@@ -11,6 +11,10 @@ public class Weapons {
         this.strength = strength;
         this.type = type;
     }
+	public Weapons() {
+		this.strength = 10;
+		this.type = "sword";
+	}
 
     public int getStrength() {
         return strength;
