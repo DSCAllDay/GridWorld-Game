@@ -14,6 +14,7 @@ public abstract class Enemy extends Actor {
     private int enemyGold;
     private int enemyLevel;
     private String enemyName;
+	public boolean defeated = false;
 
     public Enemy(int eH, int eD, int eA, int eL, int eG, String eN) {
         this.enemyHealth = eH;

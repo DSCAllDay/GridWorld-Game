@@ -67,8 +67,10 @@ public class Battle {
         } if (player.getHealth() <= 0) {
             System.out.println("You lost to " + enemy + ".");
             die();
-        } else if (enemy.getEnemyHealth() <= 0) {
+        } else if (enemy.getEnemyHealth() <= 0 && !enemy.defeated) {
             collectSpoils();
+		    enemy.removeSelfFromGrid();
+		    enemy.defeated = true;
         }
     }
 
