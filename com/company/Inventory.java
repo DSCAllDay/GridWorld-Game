@@ -37,5 +37,9 @@ public class Inventory {
     public int getNumberItems() {
         return numberItems;
     }
+
+	public ArrayList<Object> getInventoryArray() {
+		return inventory;
+	}
 }
 

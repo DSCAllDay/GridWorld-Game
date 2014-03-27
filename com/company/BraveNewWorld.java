@@ -1,13 +1,11 @@
 package com.company;
-import com.company.enemies.*;
-import com.company.inventoryclasses.Weapons;
+import com.company.enemies.Enemy;
+import com.company.enemies.Gianni;
 import info.gridworld.actor.Actor;
 import info.gridworld.actor.ActorWorld;
 import info.gridworld.actor.Rock;
 import info.gridworld.grid.BoundedGrid;
 import info.gridworld.grid.Location;
-
-import java.util.Scanner;
 
 public class BraveNewWorld extends ActorWorld{
 	private final int SIDE = 55;
@@ -15,22 +13,22 @@ public class BraveNewWorld extends ActorWorld{
 	private static BoundedGrid<Actor> masterView;
 	private BoundedGrid<Actor> currentView;
 	private static PlayerBug masterBug;
-	private  PlayerBug currentBug;
+	private PlayerBug currentBug;
 	private Inventory inventory;
 
 	public BraveNewWorld(BoundedGrid<Actor> currentView) {
 		super(currentView);
-		this.currentBug = currentBug;
 		this.currentView = currentView;
+		masterView = new BoundedGrid<Actor>(55, 55);
+		currentBug = new PlayerBug();
+		currentBug.putSelfInGrid(currentView, new Location(2, 2));
+		masterBug = new PlayerBug();
+		masterBug.putSelfInGrid(masterView, new Location(43, 27));
+
 
 	}
 
 	public void go() {
-		masterView = new BoundedGrid<Actor>(55, 55);
-        currentBug = new PlayerBug();
-        currentBug.putSelfInGrid(currentView, new Location(2, 2));
-		masterBug = new PlayerBug();
-		masterBug.putSelfInGrid(masterView, new Location(43, 27));
         new Gianni().putSelfInGrid(masterView, new Location(41, 26));
 		fillMasterView();
 		fillCurrentView();                                  // which we can use to fill in the current view each turn
@@ -77,32 +75,18 @@ public class BraveNewWorld extends ActorWorld{
 	}
 
 	private void openShop() {
-		System.out.println("Welcome to Esau's Goody Shop! What do you desire? \n ");
-		Scanner keys = new Scanner(System.in);
-
-		if(masterBug.getLevel() == 1) {
-			System.out.println("You can buy: \n(1) Bad Sword \t\t\t 3 gold");
-		} else if(masterBug.getLevel() == 2) {
-			System.out.println("You can buy: \n(1) Bad Sword \t\t\t 3 gold");
-			System.out.println("You can buy: \n(2) Epic Sword \t\t\t 8 gold");
-		} else if(masterBug.getLevel() == 3) {
-			System.out.println("You can buy: \n(1) Bad Sword \t\t\t 3 gold");
-			System.out.println("You can buy: \n(2) Epic Sword \t\t\t 8 gold");
-			System.out.println("You can buy: \n(3) Epic Sword \t\t\t 13 gold");
-		}
-		int item = keys.nextInt();
-		if(item == 1 && masterBug.getGold() >= 3) {
-			masterBug.getInventory().addToInventory(new Weapons(10, "Bad"));
-			masterBug.setGold(masterBug.getGold() - 3);
-		} else if(item == 2 && masterBug.getGold() >= 8) {
-			masterBug.getInventory().addToInventory(new Weapons(15, "Epic"));
-			masterBug.setGold(masterBug.getGold() - 8);
-		} else if(item == 3 && masterBug.getGold() >= 13) {
-			masterBug.getInventory().addToInventory(new Weapons(20, "God-Tier"));
-			masterBug.setGold(masterBug.getGold() - 13);
-		}
-
+		Shop shop = new Shop();
+		shop.open(masterBug);
 	}
+
+
+	private void transferStats() {
+		currentBug.setGold(masterBug.getGold());
+		currentBug.setHealth(masterBug.getHealth());
+		currentBug.setLevel(masterBug.getLevel());
+		currentBug.setExp(masterBug.getExp());
+	}
+
 
 	public void moveUp() {
 		clearCurrentGrid();
@@ -110,22 +94,14 @@ public class BraveNewWorld extends ActorWorld{
 		Location finalLoc = new Location(loc.getRow() - 1, loc.getCol());
 		if (masterView.get(finalLoc) == null)
 			masterBug.moveTo(finalLoc);
-        else if (masterView.get(finalLoc) instanceof Enemy) {
-            Battle battle = new Battle((PlayerBug) (masterView.get(loc)), (Enemy) (masterView.get(finalLoc)));
+		else if (masterView.get(finalLoc) instanceof Enemy) {
+			Battle battle = new Battle((PlayerBug) (masterView.get(loc)), (Enemy) (masterView.get(finalLoc)));
 			transferStats();
-        }
+		}
 		else
 			System.out.println("\nYou can't go that way!\n");
 		fillCurrentView();
 	}
-
-	private void transferStats() {
-		currentBug.setGold(masterBug.getGold());
-		currentBug.setHealth(masterBug.getHealth());
-		currentBug.setLevel(masterBug.getLevel());
-		//currentBug.setXP(masterBug.getXP);
-	}
-
 
 	public void moveLeft() {
 		clearCurrentGrid();

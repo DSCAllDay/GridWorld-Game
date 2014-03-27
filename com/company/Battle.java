@@ -1,4 +1,9 @@
 package com.company;
+
+import com.company.enemies.Enemy;
+import com.company.inventoryclasses.Spell;
+import com.company.inventoryclasses.Weapon;
+
 import java.util.Scanner;
 
 // Esau Kang, thomas Madden
@@ -7,10 +12,10 @@ import java.util.Scanner;
 // Battle - Battle an enemy!
 
 public class Battle {
-    private com.company.PlayerBug player;
-    private com.company.enemies.Enemy enemy;
+    private PlayerBug player;
+    private Enemy enemy;
 
-    public Battle(com.company.PlayerBug player, com.company.enemies.Enemy enemy) {
+    public Battle(PlayerBug player, Enemy enemy) {
         this.player = player;
         this.enemy = enemy;
         fightBattle(1);
@@ -68,22 +73,41 @@ public class Battle {
             System.out.println("You lost to " + enemy + ".");
             die();
         } else if (enemy.getEnemyHealth() <= 0 && !enemy.defeated) {
+		    calculateExp();
             collectSpoils();
 		    enemy.removeSelfFromGrid();
 		    enemy.defeated = true;
         }
     }
 
-    public void getOptions() {
+	private void calculateExp() {
+		player.setExp(player.getExp() + enemy.getEnemyGold()*7);
+		int newExp = player.getExp();
+		if(newExp > 500) {
+			player.setLevel(7);
+		} else if(newExp > 300) {
+			player.setLevel(6);
+		} else if(newExp > 210) {
+			player.setLevel(5);
+		} else if(newExp > 135) {
+			player.setLevel(4);
+		} else if(newExp > 60) {
+			player.setLevel(3);
+		} else if(newExp > 35) {
+			player.setLevel(2);
+		}
+	}
+
+	public void getOptions() {
         com.company.Inventory inventory = player.getInventory();
         int numItems = inventory.getNumberItems();
         System.out.println("\nYou have these weapons to hit with: ");
         for (int i = 0; i < numItems; i++)
-            if (inventory.getItem(i) instanceof com.company.inventoryclasses.Weapons)
+            if (inventory.getItem(i) instanceof Weapon)
                 System.out.println(inventory.getItem(i));
         System.out.println("\nYou have these spells to use: ");
         for (int i = 0; i < numItems; i++)
-            if (inventory.getItem(i) instanceof com.company.inventoryclasses.Spells)
+            if (inventory.getItem(i) instanceof Spell)
                 System.out.println(inventory.getItem(i));
         System.out.println("\nOr you can always flee.");
     }
@@ -166,8 +190,7 @@ public class Battle {
 
     public void collectSpoils() {
         player.setGold(player.getGold() + enemy.getEnemyGold());
-        player.setLevel(player.getLevel() + 1);
-        System.out.println("\nYou won! You get " + enemy.getEnemyGold() + " gold and you are now level " + player.getLevel());
+        System.out.println("\nYou won! You get " + enemy.getEnemyGold() + " gold, " + enemy.getEnemyGold() * 7 + "xp, and you are now level " + player.getLevel());
     }
 
     public void die() {
@@ -177,8 +200,7 @@ public class Battle {
 
     // pre: none
     // post: Cleans a string (Making it lowercase) and takes away all spaces/punctuation
-    public static String clean(String input)
-    {
+    public static String clean(String input) {
         String cleaned = "";
         for (int i = 0; i < input.length(); i++)
         {
