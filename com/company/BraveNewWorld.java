@@ -81,25 +81,12 @@ public class BraveNewWorld extends ActorWorld{
 		Scanner keys = new Scanner(System.in);
 
 		if(masterBug.getLevel() == 1) {
-			System.out.println("You can buy: \n(1) Bad Sword \t\t\t 3 gold");
-		} else if(masterBug.getLevel() == 2) {
-			System.out.println("You can buy: \n(1) Bad Sword \t\t\t 3 gold");
-			System.out.println("You can buy: \n(2) Epic Sword \t\t\t 8 gold");
-		} else if(masterBug.getLevel() == 3) {
-			System.out.println("You can buy: \n(1) Bad Sword \t\t\t 3 gold");
-			System.out.println("You can buy: \n(2) Epic Sword \t\t\t 8 gold");
-			System.out.println("You can buy: \n(3) Epic Sword \t\t\t 13 gold");
+			System.out.println("You can buy: \n(1) Epic Sword \t\t\t 3 gold");
 		}
 		int item = keys.nextInt();
-		if(item == 1 && masterBug.getGold() >= 3) {
-			masterBug.getInventory().addToInventory(new Weapons(10, "Bad"));
+		if(item == 1) {
+			masterBug.getInventory().addToInventory(new Weapons(10, "Epic"));
 			masterBug.setGold(masterBug.getGold() - 3);
-		} else if(item == 2 && masterBug.getGold() >= 8) {
-			masterBug.getInventory().addToInventory(new Weapons(15, "Epic"));
-			masterBug.setGold(masterBug.getGold() - 8);
-		} else if(item == 3 && masterBug.getGold() >= 13) {
-			masterBug.getInventory().addToInventory(new Weapons(20, "God-Tier"));
-			masterBug.setGold(masterBug.getGold() - 13);
 		}
 
 	}
@@ -112,18 +99,10 @@ public class BraveNewWorld extends ActorWorld{
 			masterBug.moveTo(finalLoc);
         else if (masterView.get(finalLoc) instanceof Enemy) {
             Battle battle = new Battle((PlayerBug) (masterView.get(loc)), (Enemy) (masterView.get(finalLoc)));
-			transferStats();
         }
 		else
 			System.out.println("\nYou can't go that way!\n");
 		fillCurrentView();
-	}
-
-	private void transferStats() {
-		currentBug.setGold(masterBug.getGold());
-		currentBug.setHealth(masterBug.getHealth());
-		currentBug.setLevel(masterBug.getLevel());
-		//currentBug.setXP(masterBug.getXP);
 	}
 
 
@@ -135,7 +114,6 @@ public class BraveNewWorld extends ActorWorld{
 			masterBug.moveTo(finalLoc);
         else if (masterView.get(finalLoc) instanceof Enemy) {
             Battle battle = new Battle((PlayerBug) (masterView.get(loc)), (Enemy) (masterView.get(finalLoc)));
-			transferStats();
         }
 		else
 			System.out.println("\nYou can't go that way!\n");
@@ -150,7 +128,6 @@ public class BraveNewWorld extends ActorWorld{
 			masterBug.moveTo(finalLoc);
         else if (masterView.get(finalLoc) instanceof Enemy) {
             Battle battle = new Battle((PlayerBug) (masterView.get(loc)), (Enemy) (masterView.get(finalLoc)));
-			transferStats();
         }
 		else
 			System.out.println("\nYou can't go that way!\n");
@@ -165,7 +142,6 @@ public class BraveNewWorld extends ActorWorld{
 			masterBug.moveTo(finalLoc);
         else if (masterView.get(finalLoc) instanceof Enemy) {
             Battle battle = new Battle((PlayerBug) (masterView.get(loc)), (Enemy) (masterView.get(finalLoc)));
-			transferStats();
         }
 		else
 			System.out.println("\nYou can't go that way!\n");
