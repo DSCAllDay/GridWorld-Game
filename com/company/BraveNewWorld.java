@@ -84,6 +84,7 @@ public class BraveNewWorld extends ActorWorld{
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 		if(masterBug.getLevel() == 1) {
 			System.out.println("You can buy: \n(1) Epic Sword \t\t\t 3 gold");
@@ -95,6 +96,8 @@ public class BraveNewWorld extends ActorWorld{
 		}
 >>>>>>> FETCH_HEAD
 =======
+=======
+>>>>>>> parent of f8e068b... Shop Class and Exp Changes
 =======
 >>>>>>> parent of f8e068b... Shop Class and Exp Changes
 =======
@@ -122,6 +125,9 @@ public class BraveNewWorld extends ActorWorld{
 		}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of f8e068b... Shop Class and Exp Changes
+=======
 >>>>>>> parent of f8e068b... Shop Class and Exp Changes
 =======
 >>>>>>> parent of f8e068b... Shop Class and Exp Changes
@@ -136,6 +142,7 @@ public class BraveNewWorld extends ActorWorld{
 		Location finalLoc = new Location(loc.getRow() - 1, loc.getCol());
 		if (masterView.get(finalLoc) == null)
 			masterBug.moveTo(finalLoc);
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -167,6 +174,12 @@ public class BraveNewWorld extends ActorWorld{
 			transferStats();
         }
 >>>>>>> parent of f8e068b... Shop Class and Exp Changes
+=======
+        else if (masterView.get(finalLoc) instanceof Enemy) {
+            Battle battle = new Battle((PlayerBug) (masterView.get(loc)), (Enemy) (masterView.get(finalLoc)));
+			transferStats();
+        }
+>>>>>>> parent of f8e068b... Shop Class and Exp Changes
 		else
 			System.out.println("\nYou can't go that way!\n");
 		fillCurrentView();
@@ -176,10 +189,13 @@ public class BraveNewWorld extends ActorWorld{
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> FETCH_HEAD
 =======
+=======
+>>>>>>> parent of f8e068b... Shop Class and Exp Changes
 =======
 >>>>>>> parent of f8e068b... Shop Class and Exp Changes
 =======
@@ -194,6 +210,9 @@ public class BraveNewWorld extends ActorWorld{
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of f8e068b... Shop Class and Exp Changes
+=======
 >>>>>>> parent of f8e068b... Shop Class and Exp Changes
 =======
 >>>>>>> parent of f8e068b... Shop Class and Exp Changes
