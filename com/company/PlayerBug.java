@@ -43,11 +43,16 @@ public class PlayerBug extends Actor {
         return armorStrength > 0;
     }
 
-    public boolean hasSword() {
-        for (int i = 0; i < inventory.getNumberItems(); i++)
-            if (inventory.getItem(i) instanceof Weapons)
-                return true;
-        return false;
+    public int hasSword() {
+	    int max = 0;
+        for (int i = 0; i < inventory.getNumberItems(); i++) {
+	        if(inventory.getItem(i) instanceof Weapons) {
+		        if(((Weapons) inventory.getItem(i)).getStrength() > max) {
+			        max = ((Weapons) inventory.getItem(i)).getStrength();
+		        }
+	        }
+        }
+	    return max;
     }
 
     public boolean hasFire() {
