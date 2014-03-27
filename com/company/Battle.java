@@ -36,8 +36,8 @@ public class Battle {
                     attack(0);
                     realResponse = true;
                 } else if (input.equals("slash")) {
-                    if (player.hasSword() > 0 ) {
-                        attack(player.hasSword());
+                    if (player.hasSword()) {
+                        attack(10);
                         realResponse = true;
                     }
                     else

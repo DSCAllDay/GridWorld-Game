@@ -79,6 +79,17 @@ public class BraveNewWorld extends ActorWorld{
 		shop.open(masterBug);
 	}
 
+<<<<<<< HEAD
+=======
+		if(masterBug.getLevel() == 1) {
+			System.out.println("You can buy: \n(1) Epic Sword \t\t\t 3 gold");
+		}
+		int item = keys.nextInt();
+		if(item == 1) {
+			masterBug.getInventory().addToInventory(new Weapons(10, "Epic"));
+			masterBug.setGold(masterBug.getGold() - 3);
+		}
+>>>>>>> FETCH_HEAD
 
 	private void transferStats() {
 		currentBug.setGold(masterBug.getGold());
@@ -94,15 +105,25 @@ public class BraveNewWorld extends ActorWorld{
 		Location finalLoc = new Location(loc.getRow() - 1, loc.getCol());
 		if (masterView.get(finalLoc) == null)
 			masterBug.moveTo(finalLoc);
+<<<<<<< HEAD
 		else if (masterView.get(finalLoc) instanceof Enemy) {
 			Battle battle = new Battle((PlayerBug) (masterView.get(loc)), (Enemy) (masterView.get(finalLoc)));
 			transferStats();
 		}
+=======
+        else if (masterView.get(finalLoc) instanceof Enemy) {
+            Battle battle = new Battle((PlayerBug) (masterView.get(loc)), (Enemy) (masterView.get(finalLoc)));
+        }
+>>>>>>> FETCH_HEAD
 		else
 			System.out.println("\nYou can't go that way!\n");
 		fillCurrentView();
 	}
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> FETCH_HEAD
 	public void moveLeft() {
 		clearCurrentGrid();
 		Location loc = masterBug.getLocation();
@@ -111,7 +132,6 @@ public class BraveNewWorld extends ActorWorld{
 			masterBug.moveTo(finalLoc);
         else if (masterView.get(finalLoc) instanceof Enemy) {
             Battle battle = new Battle((PlayerBug) (masterView.get(loc)), (Enemy) (masterView.get(finalLoc)));
-			transferStats();
         }
 		else
 			System.out.println("\nYou can't go that way!\n");
@@ -126,7 +146,6 @@ public class BraveNewWorld extends ActorWorld{
 			masterBug.moveTo(finalLoc);
         else if (masterView.get(finalLoc) instanceof Enemy) {
             Battle battle = new Battle((PlayerBug) (masterView.get(loc)), (Enemy) (masterView.get(finalLoc)));
-			transferStats();
         }
 		else
 			System.out.println("\nYou can't go that way!\n");
@@ -141,7 +160,6 @@ public class BraveNewWorld extends ActorWorld{
 			masterBug.moveTo(finalLoc);
         else if (masterView.get(finalLoc) instanceof Enemy) {
             Battle battle = new Battle((PlayerBug) (masterView.get(loc)), (Enemy) (masterView.get(finalLoc)));
-			transferStats();
         }
 		else
 			System.out.println("\nYou can't go that way!\n");

@@ -46,6 +46,7 @@ public class PlayerBug extends Actor {
         return armorStrength > 0;
     }
 
+<<<<<<< HEAD
     public int hasSword() {
 	    int max = 0;
         for (int i = 0; i < inventory.getNumberItems(); i++) {
@@ -56,6 +57,13 @@ public class PlayerBug extends Actor {
 	        }
         }
 	    return max;
+=======
+    public boolean hasSword() {
+        for (int i = 0; i < inventory.getNumberItems(); i++)
+            if (inventory.getItem(i) instanceof Weapons)
+                return true;
+        return false;
+>>>>>>> FETCH_HEAD
     }
 
     public boolean hasFire() {
